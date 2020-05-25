@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+namespace IDE.Themes {
+    public class Startup {
+
+        //stores configuration
+        public IConfiguration Configuration { get; }
+
+
+        //Configuration holds the basic settings: URLs, content root, application name, environment
+        public Startup(IConfiguration configuration) {
+            Configuration = configuration;
+        }
+
+        //Injects controllers with views scheme to the server
+        public void ConfigureServices(IServiceCollection services) {
+            services.AddControllersWithViews();
+        }
+
+        //This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment environment) {
+
+            //if crash in development, show the HTML page with crash dump
+            if (environment.IsDevelopment()) {
+                app.UseDeveloperExceptionPage();
+            }
+
+            //else crash in production, so redirect to error page
+            else {
+                app.UseExceptionHandler("/Home/Error");
+
+                //Adds HSTS header. The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            //redirects HTTP to HTTPS
+            app.UseHttpsRedirection();
+
+            //service of wwwroot files to the client
+            app.UseStaticFiles();
+
+            //matches HTTP requests and dispatches them to app's endpoints
+            app.UseRouting();
+
+            //shows the order of middleware authorization
+            app.UseAuthorization();
+
+            //specifies the route layout plus the default route
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+    }
+}

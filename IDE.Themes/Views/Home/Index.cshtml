@@ -1,0 +1,84 @@
+﻿@model HomeModel
+
+@{
+
+}
+
+<h3>
+    Description balbalasbldbasjkdhbsdbf asbdfjkbsd najkfbnsd <br />
+    jabfjnsd bfhjsdba jbfdsjafb dsjhbf jksdabf sdbafj hkbsdjhafb <br />
+    jdhsabfhj bsdhfbdas bfjbds afbsd bfb asbf jdsbf\b fs sdf afasf
+</h3>
+
+<div>
+    <form asp-controller="Home" asp-action="" method="post" enctype="multipart/form-data">
+        <div>
+            <p><label>1. Convert From</label></p>
+            <select id="IDEFrom" asp-for="IdeFrom" valida>
+                <option selected disabled>Select IDE</option>
+                <option>Eclipse</option>
+                <option>Visual Studio</option>
+            </select>
+        </div>
+
+        <div>
+            <p><label>3. Choose your theme</label></p>
+            <input id="ChooseFile" type="file" name="file" value="Choose File" formenctype="multipart/form-data" accept=""/>
+        </div>
+
+        <div>
+            <p><label>3. Convert To</label></p>
+            <select id="IDETo" asp-for="IdeTo">
+                <option selected>Select IDE</option>
+                <option>Eclipse</option>
+                <option>Visual Studio</option>
+            </select>
+        </div>
+
+        <div>
+            <p><label>4. Prioritize theme from (optional)</label></p>
+            <input type="checkbox" name="CCsharp" id="CCsharp" asp-for="CCsharp"/>
+            <label>C/C#</label>
+            <br/>
+            <input type="checkbox" name="Cpp" id="Cpp" asp-for="Cpp"/>
+            <label>C++</label>
+            <br />
+            <input type="checkbox" name="CssScss" id="CssScss" asp-for="CssScss"/>
+            <label>CSS/SCSS</label>
+            <br />
+            <input type="checkbox" name="Html" id="Html" asp-for="Html"/>
+            <label>html</label>
+            <br />
+            <input type="checkbox" name="Xml" id="Xml" asp-for="Xml"/>
+            <label>xml</label>
+            <br />
+            <input type="checkbox" name="Xaml" id="Xaml" asp-for="Xaml"/>
+            <label>xaml</label>
+        </div>
+
+        <div>
+            <p><label>5. Convert and Download</label></p>
+            <button id="Download" type="submit" formaction="/Home/Download">Download </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("select#IDEFrom").change(function () {
+
+            if ($("select#IDEFrom").find(":selected").text() == "Eclipse")
+
+                $("input#ChooseFile").attr("accept", ".xml");
+
+            else if ($("select#IDEFrom").find(":selected").text() == "Visual Studio")
+
+                $("input#ChooseFile").attr("accept", ".vssettings");
+
+            else $("input#ChooseFile").attr("accept", "");
+
+        });
+    });
+
+</script>

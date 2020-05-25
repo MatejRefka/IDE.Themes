@@ -1,0 +1,28 @@
+﻿<!--Every page returning a View will adher to this layout, injecting the View into RenderBody -->
+
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IDE Themes</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <a asp-controller="Home" asp-action="Index">Home</a>
+        <a asp-controller="Installation" asp-action="Index">Installation</a>
+        <a asp-controller="Stats" asp-action="Index">Cool Stats</a>
+    </div>
+
+
+    @RenderBody()
+</body>
+
+
+
+
+
+</html>
+
