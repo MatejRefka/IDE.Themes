@@ -16,6 +16,9 @@ namespace IDE.Themes {
 
             //call a builder
             CreateHostBuilder(args).Build().Run();
+
+
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) {

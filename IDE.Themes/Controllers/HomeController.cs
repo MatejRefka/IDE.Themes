@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using IDE.Themes.Models;
+using IDE.Themes.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,16 @@ using Microsoft.Extensions.Logging;
 namespace IDE.Themes.Controllers {
 
     public class HomeController : Controller {
+
+        private readonly IThemeConverter converter;
+
+
+        public HomeController(IThemeConverter converter) {
+
+            this.converter = converter;
+        }
+
+
 
         /*VIEWS*/
 
@@ -52,7 +63,7 @@ namespace IDE.Themes.Controllers {
 
             #region Convert File
 
-            int i = 2;
+            converter.CreateTempFile(file);
 
 
 
@@ -61,9 +72,9 @@ namespace IDE.Themes.Controllers {
 
             #endregion
 
-            //download file
-
             //await store file
+
+            //download file
 
 
             return RedirectToAction("Index");
