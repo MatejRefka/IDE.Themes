@@ -15,10 +15,10 @@ namespace IDE.Themes.Controllers {
 
     public class HomeController : Controller {
 
-        private readonly IThemeConverter converter;
+        private ThemeConverter converter;
 
 
-        public HomeController(IThemeConverter converter) {
+        public HomeController(ThemeConverter converter) {
 
             this.converter = converter;
         }
@@ -67,7 +67,7 @@ namespace IDE.Themes.Controllers {
 
 
 
-
+            converter.DeleteThemes();
 
 
             #endregion
@@ -75,6 +75,7 @@ namespace IDE.Themes.Controllers {
             //await store file
 
             //download file
+
 
 
             return RedirectToAction("Index");

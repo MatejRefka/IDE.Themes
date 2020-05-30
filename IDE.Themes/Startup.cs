@@ -25,7 +25,7 @@ namespace IDE.Themes {
         //Injects controllers with views scheme to the server
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllersWithViews();
-            services.AddScoped<IThemeConverter, ThemeConverter>();
+            services.AddSingleton<ThemeConverter>();
         }
 
         //This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

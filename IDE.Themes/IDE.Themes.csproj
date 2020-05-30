@@ -5,11 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Content Include="Files\templateTheme.vssettings" />
+    <Content Include="Files\templateTheme.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Files\TempTheme\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
