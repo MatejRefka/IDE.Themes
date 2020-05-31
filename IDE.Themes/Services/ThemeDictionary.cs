@@ -18,7 +18,62 @@ namespace IDE.Themes.Services {
         /*PROPERTIES*/
 
         #region dictionary mapping
+
         public IDictionary<String, VsSettingsModel> Mapping { get; set; }
+
+        //
+        public List<String> Backgrounds { get; set; } = new List<string> {
+
+                "CurrentLineActiveFormat",
+                "Selected Text",
+                "Line Number",
+                "HTML Server-Side Script",
+                "Plain Text",
+                "Breakpoint (Enabled)",
+                "Current Statement"
+        };
+
+        //each value in a map should only be used once. Fills in empty (default) CCsharp values: default CCsharp mapping
+        public IDictionary<String, String> DefaultValues { get; set; } = new Dictionary<String, String> {
+
+            {"annotation","Comment" },
+            {"bracket","Plain Text" },
+            {"constant","Identifier" },
+            {"field","Identifier" },
+            {"javadocTag","Comment" },
+            {"localVariable","Identifier" },
+            {"method","Identifier" },
+            {"operator","Identifier" },
+            {"parameterVariable","Identifier" },
+            {"staticField","Identifier" },
+            {"staticMethod","Identifier" },
+            {"typeArgument","interface name" }
+
+        };
+
+        //some Eclipse keys have no values, so their value is the same as a corresponding key with a value
+        public IDictionary<String, String> EmptyValues { get; set; } = new Dictionary<String, String> {
+
+            { "javadocLink", "javadoc" },
+            { "javadocKeyword", "javadoc" },
+            { "multiLineComment", "singleLineComment" },
+            { "selectionForeground", "foreground" },
+            { "localVariableDeclaration", "foreground" },
+            { "deletionIndication", "typeParameter" },
+            { "deprecatedMember", "typeParameter" },
+            { "searchResultIndication", "currentLine" },
+            { "filteredSearchResultIndication", "currentLine" },
+            { "occurrenceIndication", "currentLine" },
+            { "writeOccurrenceIndication", "currentLine" },
+            { "findScope", "currentLine" },
+            { "sourceHoverBackground", "class" },
+            { "methodDeclaration", "method" },
+            { "inheritedMethod", "method" },
+            { "abstractMethod", "method" },
+            { "staticFinalField", "staticField" },
+            { "commentTaskTag", "singleLineComment" }     
+
+        };
 
         #endregion dictionary mapping
 
@@ -85,10 +140,18 @@ namespace IDE.Themes.Services {
                 {"typeParameter", new VsSettingsModel { CCsharp={"type parameter name"}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
                 {"writeOccurrenceIndication", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } }
 
+                /* BACKGROUND: 
+                 * CurrentLineActiveFormat :bg
+                 * Selected Text :bg
+                 * Line Number :background + lineNumber
+                 * HTML Server-Side Script :bg
+                 * Plain Text :background foreground
+                 * Breakpoint (Enabled): bg
+                 * Current Statement: bg
+                 */
             };
         }
         #endregion populating the dictionary
-
 
     }
 }
