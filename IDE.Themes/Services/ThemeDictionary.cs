@@ -21,33 +21,21 @@ namespace IDE.Themes.Services {
 
         public IDictionary<String, VsSettingsModel> Mapping { get; set; }
 
-        //
-        public List<String> Backgrounds { get; set; } = new List<string> {
-
-                "CurrentLineActiveFormat",
-                "Selected Text",
-                "Line Number",
-                "HTML Server-Side Script",
-                "Plain Text",
-                "Breakpoint (Enabled)",
-                "Current Statement"
-        };
-
         //each value in a map should only be used once. Fills in empty (default) CCsharp values: default CCsharp mapping
         public IDictionary<String, String> DefaultValues { get; set; } = new Dictionary<String, String> {
 
-            {"annotation","Comment" },
-            {"bracket","Plain Text" },
-            {"constant","Identifier" },
-            {"field","Identifier" },
-            {"javadocTag","Comment" },
-            {"localVariable","Identifier" },
-            {"method","Identifier" },
-            {"operator","Identifier" },
-            {"parameterVariable","Identifier" },
-            {"staticField","Identifier" },
-            {"staticMethod","Identifier" },
-            {"typeArgument","interface name" }
+            {"annotation","\"Comment\"" },
+            {"bracket","\"Plain Text\"" },
+            {"constant","\"Identifier\"" },
+            {"field","\"Identifier\"" },
+            {"javadocTag","\"Comment\"" },
+            {"localVariable","\"Identifier\"" },
+            {"method","\"Identifier\"" },
+            {"operator","\"Identifier\"" },
+            {"parameterVariable","\"Identifier\"" },
+            {"staticField","\"Identifier\"" },
+            {"staticMethod","\"Identifier\"" },
+            {"typeArgument","\"interface name\"" }
 
         };
 
@@ -95,51 +83,52 @@ namespace IDE.Themes.Services {
 
             Mapping = new Dictionary<String, VsSettingsModel> {
 
-                {"abstractMethod", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"annotation", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={"ScssMixinReferenceFormat"}, Html={""}, Xml={""}, Xaml={""} } },
-                {"background", new VsSettingsModel { CCsharp={ "Plain Text", "Line Number"}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"bracket", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={"HTML Tag Delimiter"}, Xml={"XML Delimiter"}, Xaml={ "XAML Delimiter" } } },
-                {"class", new VsSettingsModel { CCsharp={"class name","struct name", "module name"}, Cpp={""}, CssScss={"ScssMixinDeclarationFormat"}, Html={""}, Xml={"XML Name"}, Xaml={ "XAML Name" } } },
-                {"commentTaskTag", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"constant", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={"CSS Keyword"}, Html={""}, Xml={""}, Xaml={""} } },
-                {"currentLine", new VsSettingsModel { CCsharp={"CurrentLineActiveFormat"}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"deletionIndication", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"deprecatedMember", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"enum", new VsSettingsModel { CCsharp={"enum name"}, Cpp={"CppEnumSemanticTokenFormat"}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"field", new VsSettingsModel { CCsharp={""}, Cpp={"CppMemberFieldSemanticTokenFormat"}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"filteredSearchResultIndication", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"findScope", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"foreground", new VsSettingsModel { CCsharp={ "Plain Text","Identifier","delegate name"}, Cpp={""}, CssScss={"CSS Property Value", "ScssVariableDeclarationClassificationFormat"}, Html={ "HTML Attribute Value","HTML Entity" }, Xml={"XML Attribute Value","XML Attribute Quotes"}, Xaml={ "XAML Attribute Value", "XAML Attribute Quotes", "XAML Markup Extension Parameter Name", "XAML Markup Extension Parameter Value", "XAML Text" } } },
-                {"inheritedMethod", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"interface", new VsSettingsModel { CCsharp={"interface name"}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"javadoc", new VsSettingsModel { CCsharp={"Breakpoint (Enabled)"}, Cpp={""}, CssScss={""}, Html={""}, Xml={"XML Doc Comment","xml doc comment - text", "xml doc comment - name","xml doc comment - processing instruction","xml doc comment - entity reference","xml doc comment - delimiter","xml doc comment - comment", "xml doc comment - attribute value", "xml doc comment - attribute quotes", "xml doc comment - attribute name"}, Xaml={""} } },
-                {"javadocKeyword", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={ "" }, Xaml={""} } },
-                {"javadocLink", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"javadocTag", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={"XML Doc Tag", "xml doc comment - cdata section"}, Xaml={""} } },
-                {"keyword", new VsSettingsModel { CCsharp={"Keyword","Preprocessor Keyword"}, Cpp={"CppNamespaceSemanticTokenFormat","CppMacroSemanticTokenFormat"}, CssScss={"CSS Selector"}, Html={ "HTML Element Name","HTML Server-Side Script" }, Xml={""}, Xaml={ "" } } },
-                {"lineNumber", new VsSettingsModel { CCsharp={"Line Number"}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"localVariable", new VsSettingsModel { CCsharp={""}, Cpp={"CppLocalVariableSemanticTokenFormat", "CppGlobalVariableSemanticTokenFormat"}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"localVariableDeclaration", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"method", new VsSettingsModel { CCsharp={""}, Cpp={"CppFunctionSemanticTokenFormat","CppMemberFunctionSemanticTokenFormat"}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"methodDeclaration", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"multiLineComment", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"number", new VsSettingsModel { CCsharp={"Number"}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={ "" } } },
-                {"occurrenceIndication", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"operator", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={"HTML Operator"}, Xml={""}, Xaml={""} } },
-                {"parameterVariable", new VsSettingsModel { CCsharp={""}, Cpp={"CppParameterSemanticTokenFormat"}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"searchResultIndication", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"selectionBackground", new VsSettingsModel { CCsharp={"Selected Text"}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"selectionForeground", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"singleLineComment", new VsSettingsModel { CCsharp={"Comment"}, Cpp={""}, CssScss={"CSS Comment"}, Html={"HTML Comment"}, Xml={"XML Comment", "XML CData Section"}, Xaml={ "XAML Comment", "XAML CData Section" } } },
-                {"sourceHoverBackground", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"staticField", new VsSettingsModel { CCsharp={""}, Cpp={"CppStaticMemberFieldSemanticTokenFormat"}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"staticFinalField", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"staticMethod", new VsSettingsModel { CCsharp={""}, Cpp={"CppStaticMemberFunctionSemanticTokenFormat"}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"string", new VsSettingsModel { CCsharp={ "String","urlformat", "string - verbatim", "Current Statement" }, Cpp={""}, CssScss={"CSS String Value"}, Html={""}, Xml={"XML Text"}, Xaml={ "" } } },
-                {"typeArgument", new VsSettingsModel { CCsharp={""}, Cpp={"CppTypeSemanticTokenFormat"}, CssScss={"CSS Property Name", "ScssVariableReferenceFormat"}, Html={"HTML Attribute"}, Xml={"XML Attribute"}, Xaml={ "XAML Attribute", "XAML Markup Extension Class" } } },
-                {"typeParameter", new VsSettingsModel { CCsharp={"type parameter name"}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } },
-                {"writeOccurrenceIndication", new VsSettingsModel { CCsharp={""}, Cpp={""}, CssScss={""}, Html={""}, Xml={""}, Xaml={""} } }
+                {"searchResultIndication", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"filteredSearchResultIndication", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"occurrenceIndication", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"writeOccurrenceIndication", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"findScope", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"deletionIndication", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"sourceHoverBackground", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"singleLineComment", new VsSettingsModel { CCsharp=new List<string>{"\"Comment\""}, Cpp=new List<string>{""}, CssScss=new List<string>{"\"CSS Comment\""}, Html=new List<string>{"\"HTML Comment\""}, Xml=new List<string>{ "\"XML Comment\"", "\"XML CData Section\""}, Xaml=new List<string>{ "\"XAML Comment\"", "\"XAML CData Section\"" } } },
+                {"multiLineComment", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"commentTaskTag", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"javadoc ", new VsSettingsModel { CCsharp=new List<string>{"\"Breakpoint (Enabled)\""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{ "\"XML Doc Comment\"", "\"xml doc comment - text\"", "\"xml doc comment - name\"", "\"xml doc comment - processing instruction\"", "\"xml doc comment - entity reference\"", "\"xml doc comment - delimiter\"", "\"xml doc comment - comment\"", "\"xml doc comment - attribute value\"", "\"xml doc comment - attribute quotes\"", "\"xml doc comment - attribute name\""}, Xaml=new List<string>{""} } },
+                {"javadocLink", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"javadocTag", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{ "\"XML Doc Tag\"", "\"xml doc comment - cdata section\""}, Xaml=new List<string>{""} } },
+                {"javadocKeyword", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{ "" }, Xaml=new List<string>{""} } },
+                {"class", new VsSettingsModel { CCsharp=new List<string>{ "\"class name\"", "\"struct name\"", "\"module name\""}, Cpp=new List<string>{""}, CssScss=new List<string>{"\"ScssMixinDeclarationFormat\""}, Html=new List<string>{""}, Xml=new List<string>{"\"XML Name\""}, Xaml=new List<string>{ "\"XAML Name\"" } } },
+                {"interface", new VsSettingsModel { CCsharp=new List<string>{"\"interface name\""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"method ", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{ "\"CppFunctionSemanticTokenFormat\"", "\"CppMemberFunctionSemanticTokenFormat\""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"methodDeclaration", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"bracket", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{"\"HTML Tag Delimiter\""}, Xml=new List<string>{"\"XML Delimiter\""}, Xaml=new List<string>{ "\"XAML Delimiter\"" } } },
+                {"number", new VsSettingsModel { CCsharp=new List<string>{"\"Number\""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{ "" } } },
+                {"string", new VsSettingsModel { CCsharp=new List<string>{ "\"String\"", "\"urlformat\"", "\"string - verbatim\"", "\"Current Statement\"" }, Cpp=new List<string>{""}, CssScss=new List<string>{"\"CSS String Value\""}, Html=new List<string>{""}, Xml=new List<string>{"\"XML Text\""}, Xaml=new List<string>{ "" } } },
+                {"operator", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{"\"HTML Operator\""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"keyword", new VsSettingsModel { CCsharp=new List<string>{ "\"Keyword\"", "\"Preprocessor Keyword\""}, Cpp=new List<string>{ "\"CppNamespaceSemanticTokenFormat\"", "\"CppMacroSemanticTokenFormat\""}, CssScss=new List<string>{"\"CSS Selector\""}, Html=new List<string>{ "\"HTML Element Name\"", "\"HTML Server-Side Script\"" }, Xml=new List<string>{""}, Xaml=new List<string>{ "" } } },
+                {"annotation", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{"\"ScssMixinReferenceFormat\""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"staticMethod", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{"\"CppStaticMemberFunctionSemanticTokenFormat\""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"localVariable ", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{ "\"CppLocalVariableSemanticTokenFormat\"", "\"CppGlobalVariableSemanticTokenFormat\""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"localVariableDeclaration", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"field", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{"\"CppMemberFieldSemanticTokenFormat\""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"staticField", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{"\"CppStaticMemberFieldSemanticTokenFormat\""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"staticFinalField", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"deprecatedMember", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"enum", new VsSettingsModel { CCsharp=new List<string>{"\"enum name\""}, Cpp=new List<string>{"\"CppEnumSemanticTokenFormat\""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"inheritedMethod", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"abstractMethod", new VsSettingsModel { CCsharp = new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"parameterVariable", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{"\"CppParameterSemanticTokenFormat\""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"typeArgument", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{"\"CppTypeSemanticTokenFormat\""}, CssScss=new List<string>{ "\"CSS Property Name\"", "\"ScssVariableReferenceFormat\""}, Html=new List<string>{"\"HTML Attribute\""}, Xml=new List<string>{"\"XML Attribute\""}, Xaml=new List<string>{ "\"XAML Attribute\"", "\"XAML Markup Extension Class\"" } } },
+                {"typeParameter", new VsSettingsModel { CCsharp=new List<string>{"\"type parameter name\""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"constant", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{"\"CSS Keyword\""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"foreground", new VsSettingsModel { CCsharp=new List<string>{ "\"Identifier\"", "\"delegate name\""}, Cpp=new List<string>{""}, CssScss=new List<string>{ "\"CSS Property Value\"", "\"ScssVariableDeclarationClassificationFormat\""}, Html=new List<string>{ "\"HTML Attribute Value\"", "\"HTML Entity\"" }, Xml=new List<string>{ "\"XML Attribute Value\"", "\"XML Attribute Quotes\""}, Xaml=new List<string>{ "\"XAML Attribute Value\"", "\"XAML Attribute Quotes\"", "\"XAML Markup Extension Parameter Name\"", "\"XAML Markup Extension Parameter Value\"", "\"XAML Text\"" } } },
+                {"background", new VsSettingsModel { CCsharp=new List<string>{ "\"Plain Text\""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"currentLine", new VsSettingsModel { CCsharp=new List<string>{"\"CurrentLineActiveFormat\""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"lineNumber", new VsSettingsModel { CCsharp=new List<string>{"\"Line Number\""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"selectionBackground", new VsSettingsModel { CCsharp=new List<string>{"\"Selected Text\""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } },
+                {"selectionForeground", new VsSettingsModel { CCsharp=new List<string>{""}, Cpp=new List<string>{""}, CssScss=new List<string>{""}, Html=new List<string>{""}, Xml=new List<string>{""}, Xaml=new List<string>{""} } }
 
+                
                 /* BACKGROUND: 
                  * CurrentLineActiveFormat :bg
                  * Selected Text :bg

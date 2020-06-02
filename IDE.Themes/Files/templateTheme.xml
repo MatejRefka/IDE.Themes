@@ -12,6 +12,7 @@
     <commentTaskTag color="#8be9fd" italic="false" underline="true" strikethrough="false" />
     <javadoc color="#6272a4" italic="false" />
     <javadocLink color="#8be9fd" italic="false" underline="true" strikethrough="false" />
+    <javadocTag color="#8be9fd" italic="false" />
     <javadocKeyword color="#8be9fd" italic="false" />
     <class color="#8be9fd" bold="false" underline="false" strikethrough="false" />
     <interface color="#8be9fd" />

@@ -16,11 +16,12 @@ namespace IDE.Themes.Controllers {
     public class HomeController : Controller {
 
         private ThemeConverter converter;
+        private ThemeDictionary dictionary;
 
-
-        public HomeController(ThemeConverter converter) {
+        public HomeController(ThemeConverter converter, ThemeDictionary dictionary) {
 
             this.converter = converter;
+            this.dictionary = dictionary;
         }
 
 
@@ -35,7 +36,7 @@ namespace IDE.Themes.Controllers {
 
 
         [HttpPost]
-        public async Task<IActionResult> Download(HomeModel homeModel, IFormFile file) {
+        public async Task<IActionResult> Download(HomeModel homeModel, IFormFile file, ThemeDictionary dictionary) {
 
             #region Check Field Validity
 
@@ -63,11 +64,8 @@ namespace IDE.Themes.Controllers {
 
             #region Convert File
 
-            converter.CreateTempFile(file);
+            converter.ConvertEclipseToVisual(file, dictionary);
 
-
-
-            converter.DeleteThemes();
 
 
             #endregion
