@@ -101,6 +101,7 @@ namespace IDE.Themes.Services {
         }
         #endregion Delete the contructed theme (after download)
 
+        #region IFormFile to string conversion (async)
         public async Task<String> FileToStringAsync(IFormFile file) {
 
             string fileText;
@@ -112,8 +113,11 @@ namespace IDE.Themes.Services {
                 return fileText = await reader.ReadToEndAsync();
             }
         }
+        #endregion IFormFile to string conversion (async)
 
-        public String ConvertEclipseToVisual(IFormFile file, ThemeDictionary dictionary) {
+
+        #region Convert Eclipse to VS, create and populate a .vssettings theme file
+        public void ConvertEclipseToVisual(IFormFile file, ThemeDictionary dictionary) {
 
             string eclipseFileText=FileToStringAsync(file).Result;
 
@@ -129,8 +133,6 @@ namespace IDE.Themes.Services {
 
             //split the single string into <Item.../> strings, preserving the delimeters
             string[] vsItems = Regex.Split(vsFileText, @"(?=<)");
-
-            List<String> updatedVsItems = new List<string>();
 
             foreach (KeyValuePair<String, VsSettingsModel> entry in dictionary.Mapping) {
 
@@ -235,32 +237,233 @@ namespace IDE.Themes.Services {
             //write the new theme to TempTheme folder
             File.WriteAllLines(ThemeDir, convertedItems);
 
+        }
+        #endregion Convert Eclipse to VS, create and populate a .vssettings theme file
+
+        #region Convert VS to Eclipse, create and populate a .vssettings theme file
+        public void ConvertVisualToEclipse(IFormFile file, ThemeDictionary dictionary, HomeModel model) {
+
+            string vsFileText = FileToStringAsync(file).Result;
+
+            //split the single string into <Item.../> strings, preserving the delimeters
+            string[] vsItems = Regex.Split(vsFileText, @"(?=<)");
 
 
+            //create xyz.xml file in ~\Files\TempTheme\xyz.xml
+            CreateTempFile(file);
 
-            //for each key in dictionary
-            //find correct entry in eclipseItems
-            //extract string color
-            //convert to BIOS color
-            //for each value 
-            //find correct entry in vsItems
-            //string replace
+            //path of the created file = ThemeDir
+            string eclipseFileText = File.ReadAllText(ThemeDir);
 
-            //write and format vsItems to temp
+            //split the single string into <Item.../> strings, preserving the delimeters
+            string[] eclipseItems = Regex.Split(eclipseFileText, @"(?=<)");
+
+            int counter = 0;
+
+            foreach (KeyValuePair<String, VsSettingsModel> entry in dictionary.Mapping) { //current key = javadoc
+
+                counter++;
+
+                bool doubleCheckVal = false;
+
+                string currentKey = entry.Key;
+                string correctValue = "";
+
+                //find the correct value for this key based on preference
+                if (model.CCsharp) {
+                    if (entry.Value.CCsharp[0] != "") {
+                        foreach (string value in entry.Value.CCsharp) {
+                            foreach (string vsItem in vsItems) {
+                                if (vsItem.Contains(value)) {
+                                    correctValue = value;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (model.Cpp) {
+                    if (entry.Value.Cpp[0] != "") {
+                        correctValue = entry.Value.Cpp[0];
+                    }
+                    else {
+
+                        if (dictionary.EmptyValues.ContainsKey(currentKey)) {
+                            string backupKey = dictionary.EmptyValues[currentKey];
+
+                            if (dictionary.Mapping[backupKey].Cpp[0] != "") {
+                                correctValue = dictionary.Mapping[backupKey].Cpp[0];
+                            }
+                        }
+                    }
+                }
+                else if (model.CssScss) {
+                    if (entry.Value.CssScss[0] != "") {
+                        correctValue = entry.Value.CssScss[0];
+                    }
+                    else {
+
+                        if (dictionary.EmptyValues.ContainsKey(currentKey)) {
+                            string backupKey = dictionary.EmptyValues[currentKey];
+
+                            if (dictionary.Mapping[backupKey].CssScss[0] != "") {
+                                correctValue = dictionary.Mapping[backupKey].CssScss[0];
+                            }
+                        }
+                    }
+                }
+                else if (model.Html) {
+                    if (entry.Value.Html[0] != "") {
+                        correctValue = entry.Value.Html[0];
+                    }
+                    else {
+
+                        if (dictionary.EmptyValues.ContainsKey(currentKey)) {
+                            string backupKey = dictionary.EmptyValues[currentKey];
+
+                            if (dictionary.Mapping[backupKey].Html[0] != "") {
+                                correctValue = dictionary.Mapping[backupKey].Html[0];
+                            }
+                        }
+                    }
+                }
+                else if (model.Xaml) {
+                    if (entry.Value.Xaml[0] != "") {
+                        correctValue = entry.Value.Xaml[0];
+                    }
+                    else {
+
+                        if (dictionary.EmptyValues.ContainsKey(currentKey)) {
+                            string backupKey = dictionary.EmptyValues[currentKey];
+
+                            if (dictionary.Mapping[backupKey].Xaml[0] != "") {
+                                correctValue = dictionary.Mapping[backupKey].Xaml[0];
+                            }
+                        }
+                    }
+                }
+                else if (model.Xml) {
+                    if (entry.Value.Xml[0] != "") {
+                        correctValue = entry.Value.Xml[0];
+                    }
+                    else {
+
+                        if (dictionary.EmptyValues.ContainsKey(currentKey)) {
+                            string backupKey = dictionary.EmptyValues[currentKey];
+
+                            if (dictionary.Mapping[backupKey].Xml[0] != "") {
+                                correctValue = dictionary.Mapping[backupKey].Xml[0];
+                            }
+                        }
+                    }
+                }
+
+                //if there's no preference and the mapping doesn't have a default CCsharp value, then atrificially get a replacement default value
+                if (entry.Value.CCsharp[0] == "" && correctValue == "") {
+                    foreach (KeyValuePair<String, String> defaultEntry in dictionary.DefaultValues) {
+
+                        if (defaultEntry.Key == currentKey) {
+                            correctValue = defaultEntry.Value;
+                            doubleCheckVal = true;
+                            break;
+                        }
+                    }
+                }
+
+                //else use the default value for CCsharp.
+                if (correctValue == "" || correctValue ==null) {
+
+                    foreach (string value in entry.Value.CCsharp) {
+                        foreach (string vsItem in vsItems) {
+                            if (vsItem.Contains(value)) {
+                                correctValue = value;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                //if a default value was used then check for other values in the same list if they match an original key instead.
+                if (doubleCheckVal == true) {
+
+                    string correctkey = dictionary.Mapping.FirstOrDefault(x => x.Value.CCsharp[0] == correctValue).Key;
+                    foreach (string vsItem in vsItems) {
+                        foreach(string value in dictionary.Mapping[correctkey].CCsharp) {
+                            if (vsItem.Contains(value)) {
+                                correctValue = value;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                string color = "";
+
+                //extract and convert the color from correct value
+
+                if (correctValue != "") {
+                    foreach (string vsItem in vsItems) {
 
 
+                        string valueToCompare = correctValue;
+                        valueToCompare = valueToCompare.Remove(0, 1);
+                        valueToCompare = valueToCompare.Remove(valueToCompare.Length - 1);
 
-            return null;
+                        if (vsItem.Contains(valueToCompare)) {
+
+                            if (valueToCompare == "Plain Text" || valueToCompare == "Selected Text" || valueToCompare == "CurrentLineActiveFormat" || valueToCompare == "HTML Server-Side Script" || valueToCompare == "Breakpoint (Enabled)" || valueToCompare == "Current Statement") {
+
+                                int startIndex = vsItem.IndexOf("Background=\"") + 12;
+                                color = vsItem.Substring(startIndex, 10);
+                                color = ConvertColor(color);
+                                break;
+
+                            }
+                            else {
+                                int startIndex = vsItem.IndexOf("Foreground=\"") + 12;
+                                color = vsItem.Substring(startIndex, 10);
+                                color = ConvertColor(color);
+                                break;
+                            }
+                        }
+                    }
+
+                    //replace the colors for each new eclipse item
+
+                    if (correctValue != "") {
+
+                        foreach (string eclipseItem in eclipseItems) {
+
+                            string keyToCompare = currentKey;
+                            keyToCompare = keyToCompare.Remove(0, 1);
+                            keyToCompare = keyToCompare.Remove(keyToCompare.Length - 1);
+                            if (eclipseItem.Contains(keyToCompare)) {
+
+                                int startI = eclipseItem.IndexOf("color=\"") + 7;
+
+                                if (color != "") {
+                                    //adjust new color to Background or Foreground and replace it to the final file
+                                    string tempColor = eclipseItem.Substring(startI, 7);
+                                    var newItem = eclipseItem.Replace(tempColor, color);
+                                    eclipseFileText = eclipseFileText.Replace(eclipseItem, newItem);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            string[] convertedItems = Regex.Split(eclipseFileText, @"(?=<)");
+
+            //write the new theme to TempTheme folder
+            File.WriteAllLines(ThemeDir, convertedItems);
 
         }
+        #endregion Convert VS to Eclipse, create and populate a .vssettings theme file
 
 
-
-        public string ConvertVisualToEclipse() {
-
-            return null;
-        }
-
+        #region Hex color <=> BIOS color code converter
         public string ConvertColor(String color) {
 
             //eclipse to VS
@@ -271,7 +474,7 @@ namespace IDE.Themes.Services {
                 return biosColor;
             }
             //VS to Eclipse
-            if (color[0]==0) {
+            if (color[0]=='0') {
 
                 //0x00C679FF = #FF79C6
                 string hexColor = "#" + color[8] + color[9] + color[6] + color[7] + color[4] + color[5];
@@ -280,7 +483,7 @@ namespace IDE.Themes.Services {
 
             return null;
         }
-
+        #endregion Hex color <=> BIOS color code converter
 
     }
 }

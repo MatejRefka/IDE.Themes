@@ -64,7 +64,16 @@ namespace IDE.Themes.Controllers {
 
             #region Convert File
 
-            converter.ConvertEclipseToVisual(file, dictionary);
+
+            if (homeModel.IdeFrom == "Eclipse" && homeModel.IdeTo == "Visual Studio") {
+                converter.ConvertEclipseToVisual(file, dictionary);
+            }
+
+            else if (homeModel.IdeFrom == "Visual Studio" && homeModel.IdeTo == "Eclipse") {
+                converter.ConvertVisualToEclipse(file, dictionary, homeModel);
+            }
+
+            
 
 
 
