@@ -14,7 +14,7 @@
     <form asp-controller="Home" asp-action="" method="post" enctype="multipart/form-data">
         <div>
             <p><label>1. Convert From</label></p>
-            <select id="IDEFrom" asp-for="IdeFrom" valida>
+            <select id="IDEFrom" asp-for="IdeFrom">
                 <option selected disabled>Select IDE</option>
                 <option>Eclipse</option>
                 <option>Visual Studio</option>
@@ -22,8 +22,9 @@
         </div>
 
         <div>
-            <p><label>3. Choose your theme</label></p>
-            <input id="ChooseFile" type="file" name="file" value="Choose File" formenctype="multipart/form-data" accept=""/>
+            <p><label>2. Choose your theme</label></p>
+            <input id="chooseFile" type="file" name="file" formenctype="multipart/form-data" accept="" style="display: none;" />
+            <input type="button" value="Choose File" onclick="document.getElementById('chooseFile').click();" />
         </div>
 
         <div>
@@ -36,31 +37,36 @@
         </div>
 
         <div>
-            <p><label>4. Prioritize theme from (optional)</label></p>
-            <input type="checkbox" name="CCsharp" id="CCsharp" asp-for="CCsharp"/>
+            <p><label>3.5. Prioritize theme from (optional)</label></p>
+            <input type="checkbox" name="CCsharp" id="CCsharp" asp-for="CCsharp" />
             <label>C/C#</label>
-            <br/>
-            <input type="checkbox" name="Cpp" id="Cpp" asp-for="Cpp"/>
+            <br />
+            <input type="checkbox" name="Cpp" id="Cpp" asp-for="Cpp" />
             <label>C++</label>
             <br />
-            <input type="checkbox" name="CssScss" id="CssScss" asp-for="CssScss"/>
+            <input type="checkbox" name="CssScss" id="CssScss" asp-for="CssScss" />
             <label>CSS/SCSS</label>
             <br />
-            <input type="checkbox" name="Html" id="Html" asp-for="Html"/>
+            <input type="checkbox" name="Html" id="Html" asp-for="Html" />
             <label>html</label>
             <br />
-            <input type="checkbox" name="Xml" id="Xml" asp-for="Xml"/>
+            <input type="checkbox" name="Xml" id="Xml" asp-for="Xml" />
             <label>xml</label>
             <br />
-            <input type="checkbox" name="Xaml" id="Xaml" asp-for="Xaml"/>
+            <input type="checkbox" name="Xaml" id="Xaml" asp-for="Xaml" />
             <label>xaml</label>
         </div>
 
         <div>
-            <p><label>5. Convert and Download</label></p>
-            <button id="Download" type="submit" formaction="/Home/Download">Download </button>
+            <p><label>4. Convert</label></p>
+            <button id="Convert" type="submit" formaction="/Home/Convert">Convert </button>
         </div>
     </form>
+        <div>
+            <p><label>5. Download</label></p>
+            <button id="Download" onclick="location.href='@Url.Action("Download", "Home")'" >Download </button>
+        </div>
+    
 </div>
 
 <script>
@@ -70,13 +76,13 @@
 
             if ($("select#IDEFrom").find(":selected").text() == "Eclipse")
 
-                $("input#ChooseFile").attr("accept", ".xml");
+                $("input#chooseFile").attr("accept", ".xml");
 
             else if ($("select#IDEFrom").find(":selected").text() == "Visual Studio")
 
-                $("input#ChooseFile").attr("accept", ".vssettings");
+                $("input#chooseFile").attr("accept", ".vssettings");
 
-            else $("input#ChooseFile").attr("accept", "");
+            else $("input#chooseFile").attr("accept", "");
 
         });
     });
