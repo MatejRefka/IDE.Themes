@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IDE.Themes.Data;
+using IDE.Themes.Models;
 using IDE.Themes.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +26,9 @@ namespace IDE.Themes {
 
         //Injects controllers with views scheme to the server
         public void ConfigureServices(IServiceCollection services) {
+
             services.AddControllersWithViews();
+            services.AddSingleton<UserColorDataModel>();
             services.AddSingleton<ThemeConverter>();
             services.AddSingleton<ThemeDictionary>();
         }

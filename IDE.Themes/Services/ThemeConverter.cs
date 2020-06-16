@@ -41,11 +41,14 @@ namespace IDE.Themes.Services {
 
         /*CONSTRUCTOR*/
 
+        #region constructor
         public ThemeConverter(IWebHostEnvironment environment, ThemeDictionary dictionary) {
 
             this.environment = environment;
             this.dictionary = dictionary;
         }
+        #endregion constructor
+
 
         /*METHODS*/
 

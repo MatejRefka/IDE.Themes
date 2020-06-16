@@ -59,12 +59,12 @@
 
         <div>
             <p><label>4. Convert</label></p>
-            <button id="Convert" type="submit" formaction="/Home/Convert">Convert </button>
+            <button id="Convert" type="submit" formaction="/Home/Convert" usesubmitbehaviour="false" onclick="Download.disabled='true'" >Convert </button>
         </div>
     </form>
         <div>
             <p><label>5. Download</label></p>
-            <button id="Download" onclick="location.href='@Url.Action("Download", "Home")'" >Download </button>
+            <button id="Download" name="Downlaod" onclick="location.href='@Url.Action("Download", "Home")'" usesu >Download </button>
         </div>
     
 </div>

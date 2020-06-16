@@ -43,19 +43,19 @@
     
 <number color="#529ca8" />
     
-<string color="#84c4ce" />
+<string color="#333d44" />
     
 <operator color="#d4856a" />
     
 <keyword color="#d4856a" bold="false" />
     
-<annotation color="#50fa7b" />
+<annotation color="#4e5c66" />
     
 <staticMethod color="#d4856a" />
     
 <localVariable color="#d4856a" />
     
-<localVariableDeclaration color="#43b5b3" />
+<localVariableDeclaration color="#d4856a" />
     
 <field color="#d4856a" />
     
@@ -73,23 +73,23 @@
     
 <parameterVariable color="#d4856a" />
     
-<typeArgument color="#d4856a" />
+<typeArgument color="#43b5b3" />
     
 <typeParameter color="#43b5b3" />
     
-<constant color="#5298c4" />
+<constant color="#d4856a" />
     
 <background color="#283035" />
     
 <currentLine color="#2f383e" />
     
-<foreground color="#43b5b3" />
+<foreground color="#d4856a" />
     
 <lineNumber color="#54656f" />
     
 <selectionBackground color="#2e7d7c" />
     
-<selectionForeground color="#43b5b3" />
+<selectionForeground color="#d4856a" />
 
 </colorTheme>
 
