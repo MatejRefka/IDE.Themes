@@ -31,6 +31,8 @@ namespace IDE.Themes {
             services.AddSingleton<UserColorDataModel>();
             services.AddSingleton<ThemeConverter>();
             services.AddSingleton<ThemeDictionary>();
+            services.AddSingleton<ColorStringConverter>();
+            services.AddSingleton<HelperModel>();
         }
 
         //This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

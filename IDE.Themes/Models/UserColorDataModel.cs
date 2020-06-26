@@ -12,6 +12,10 @@ namespace IDE.Themes.Models {
 
     public class UserColorDataModel {
 
+        public UserColorDataModel() {
+
+        }
+
         //PROPERTIES: TABLE COLUMNS
         [Key]
         [MaxLength(50)]
@@ -19,94 +23,61 @@ namespace IDE.Themes.Models {
 
         public DateTimeOffset Date { get; set; }
 
-        [MaxLength(8)]
-        public string SearchResultIndication { get; set; }
-        [MaxLength(8)]
-        public string FilteredSearchResultIndication { get; set; }
-        [MaxLength(8)]
-        public string OccurrenceIndication { get; set; }
-        [MaxLength(8)]
-        public string WriteOccurrenceIndication { get; set; }
-        [MaxLength(8)]
-        public string FindScope { get; set; }
-        [MaxLength(8)]
-        public string DeletionIndication { get; set; }
-        [MaxLength(8)]
-        public string SourceHoverBackground { get; set; }
-        [MaxLength(8)]
-        public string SingleLineComment { get; set; }
-        [MaxLength(8)]
-        public string MultiLineComment { get; set; }
-        [MaxLength(8)]
-        public string CommentTaskTag { get; set; }
-        [MaxLength(8)]
-        public string Javadoc { get; set; }
-        [MaxLength(8)]
-        public string JavadocLink { get; set; }
-        [MaxLength(8)]
-        public string JavadocTag { get; set; }
-        [MaxLength(8)]
-        public string JavadocKeyword { get; set; }
-        [MaxLength(8)]
-        public string Class { get; set; }
-        [MaxLength(8)]
-        public string Interface { get; set; }
-        [MaxLength(8)]
-        public string Method { get; set; }
-        [MaxLength(8)]
-        public string MethodDeclaration { get; set; }
-        [MaxLength(8)]
-        public string Bracket { get; set; }
-        [MaxLength(8)]
-        public string Number { get; set; }
-        [MaxLength(8)]
-        public string String { get; set; }
-        [MaxLength(8)]
-        public string Operator { get; set; }
-        [MaxLength(8)]
-        public string Keyword { get; set; }
-        [MaxLength(8)]
-        public string Annotation { get; set; }
-        [MaxLength(8)]
-        public string StaticMethod { get; set; }
-        [MaxLength(8)]
-        public string LocalVariable { get; set; }
-        [MaxLength(8)]
-        public string LocalVariableDeclaration { get; set; }
-        [MaxLength(8)]
-        public string Field { get; set; }
-        [MaxLength(8)]
-        public string StaticField { get; set; }
-        [MaxLength(8)]
-        public string StaticFinalField { get; set; }
-        [MaxLength(8)]
-        public string DeprecatedMember { get; set; }
-        [MaxLength(8)]
-        public string Enum { get; set; }
-        [MaxLength(8)]
-        public string InheritedMethod { get; set; }
-        [MaxLength(8)]
-        public string AbstractMethod { get; set; }
-        [MaxLength(8)]
-        public string ParameterVariable { get; set; }
-        [MaxLength(8)]
-        public string TypeArgument { get; set; }
-        [MaxLength(8)]
-        public string TypeParameter { get; set; }
-        [MaxLength(8)]
-        public string Constant { get; set; }
-        [MaxLength(8)]
-        public string Background { get; set; }
-        [MaxLength(8)]
-        public string CurrentLine { get; set; }
-        [MaxLength(8)]
-        public string Foreground { get; set; }
-        [MaxLength(8)]
-        public string LineNumber { get; set; }
-        [MaxLength(8)]
-        public string SelectionBackground { get; set; }
-        [MaxLength(8)]
-        public string SelectionForeground { get; set; }
+        //foregrounds
+
+        public bool RedOccurance { get; set; }
+
+        public bool PinkOccurance { get; set; }
+
+        public bool PurpleOccurance { get; set; }
+
+        public bool BlueOccurance { get; set; }
+
+        public bool CyanOccurance { get; set; }
+
+        public bool TealOccurance { get; set; }
+
+        public bool GreenOccurance { get; set; }
+
+        public bool YellowOccurance { get; set; }
+
+        public bool OrangeOccurance { get; set; }
+
+        public bool BrownOccurance { get; set; }
+
+        public bool WhiteOccurance { get; set; }
+
+        public bool GrayOccurance { get; set; }
+
+        public bool BlackOccurance { get; set; }
+
+        //backgrounds
+
+        public bool BRedOccurance { get; set; }
+
+        public bool BPinkOccurance { get; set; }
+
+        public bool BPurpleOccurance { get; set; }
+
+        public bool BBlueOccurance { get; set; }
+
+        public bool BCyanOccurance { get; set; }
+
+        public bool BTealOccurance { get; set; }
+
+        public bool BGreenOccurance { get; set; }
+
+        public bool BYellowOccurance { get; set; }
+
+        public bool BOrangeOccurance { get; set; }
+
+        public bool BBrownOccurance { get; set; }
+
+        public bool BWhiteOccurance { get; set; }
+
+        public bool BGrayOccurance { get; set; }
+
+        public bool BBlackOccurance { get; set; }
 
     }
 }

@@ -1,0 +1,31 @@
+﻿/*Default Selectors*/
+
+h2{
+    color:red;
+}
+
+
+
+/*Classes*/
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 50vh;
+    width: 80vw;
+}
+
+/*Sudo Selectors*/
+
+/*IDs*/
+
+
+
+
+
+
+
+
+
+
+

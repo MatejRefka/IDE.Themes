@@ -25,7 +25,7 @@ namespace IDE.Themes.Services {
         public IDictionary<String, String> DefaultValues { get; set; } = new Dictionary<String, String> {
 
             {"\"annotation\"","\"Comment\"" },
-            {"\"bracket\"","\"Plain Text\"" },
+            {"\"bracket\"","\"Identifier\"" },
             {"\"constant\"","\"Identifier\"" },
             {"\"field\"","\"Identifier\"" },
             {"\"javadocTag\"","\"Comment\"" },
