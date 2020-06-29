@@ -2,18 +2,16 @@
 
 @{
 
+
 }
 
-<h3>
-    Description balbalasbldbasjkdhbsdbf asbdfjkbsd najkfbnsd <br />
-    jabfjnsd bfhjsdba jbfdsjafb dsjhbf jksdabf sdbafj hkbsdjhafb <br />
-    jdhsabfhj bsdhfbdas bfjbds afbsd bfb asbf jdsbf\b fs sdf afasf
-</h3>
+<h2 class="pageTitle">The Converter.</h2>
 
-<div>
+
+<div class="convertForm">
     <form asp-controller="Home" asp-action="" method="post" enctype="multipart/form-data">
         <div>
-            <p><label>1. Convert From</label></p>
+            <p><label><span class="numbers">1</span>. Convert From</label></p>
             <select id="IDEFrom" asp-for="IdeFrom">
                 <option selected disabled>Select IDE</option>
                 <option>Eclipse</option>
@@ -22,22 +20,23 @@
         </div>
 
         <div>
-            <p><label>2. Choose your theme</label></p>
+            <p><label><span class="numbers">2</span>. Choose your theme</label></p>
             <input id="chooseFile" type="file" name="file" formenctype="multipart/form-data" accept="" style="display: none;" />
             <input type="button" value="Choose File" onclick="document.getElementById('chooseFile').click();" />
         </div>
 
         <div>
-            <p><label>3. Convert To</label></p>
+            <p><label><span class="numbers">3</span>. Convert To</label></p>
             <select id="IDETo" asp-for="IdeTo">
                 <option selected>Select IDE</option>
                 <option>Eclipse</option>
                 <option>Visual Studio</option>
             </select>
+            <span class="warning"></span>
         </div>
 
-        <div>
-            <p><label>3.5. Prioritize theme from (optional)</label></p>
+        <div id="optionalParameters">
+            <p><label><span class="numbers">3</span>.<span class="numbers">5</span>. Prioritize theme from (optional)</label></p>
             <input type="checkbox" name="CCsharp" id="CCsharp" asp-for="CCsharp" />
             <label>C/C#</label>
             <br />
@@ -58,27 +57,59 @@
         </div>
 
         <div>
-            <p><label>4. Convert</label></p>
-            <button id="Convert" type="submit" formaction="/Home/Convert" usesubmitbehaviour="false" onclick="Download.disabled='true'" >Convert </button>
+            <p><label><span class="numbers">4</span>. Convert</label></p>
+            <button id="Convert" type="submit" formaction="/Home/Convert" usesubmitbehaviour="false" onclick="Download.disabled='true'">Convert </button>
+            <span class="error"></span>
         </div>
     </form>
-        <div>
-            <p><label>5. Download</label></p>
-            <button id="Download" name="Downlaod" onclick="location.href='@Url.Action("Download", "Home")'" usesu >Download </button>
-        </div>
-    
+    <div>
+        <p><label><span class="numbers">5</span>. Download</label></p>
+        <button id="Download" name="Download" onclick="location.href='@Url.Action("Download", "Home")'">Download </button>
+    </div>
+    <div>
+        <p id="artificialControl">PP</p>
+    </div>
+
 </div>
 
 <script>
+
+
+
+    //setup on page load
+    $(document).ready(function () {
+
+        $("div#optionalParameters").hide();
+
+
+
+        @if(ViewData["DownloadCounter"].ToString() == "1") {
+
+            <text>$("button#Download").prop("disabled", false);</text>
+
+
+        } 
+        @if(ViewData["DownloadCounter"].ToString() != "1") {
+
+            <text>$("button#Download").prop("disabled", true);</text>
+        }
+
+        //$("button#Download").prop("disabled", true);
+
+        $("p#artificialControl").text($("#chooseFile").val());
+
+    });
+
+    //choose a correct extension based on IDEFrom
     $(document).ready(function () {
 
         $("select#IDEFrom").change(function () {
 
-            if ($("select#IDEFrom").find(":selected").text() == "Eclipse")
+            if ($("select#IDEFrom").find(":selected").text() === "Eclipse")
 
                 $("input#chooseFile").attr("accept", ".xml");
 
-            else if ($("select#IDEFrom").find(":selected").text() == "Visual Studio")
+            else if ($("select#IDEFrom").find(":selected").text() === "Visual Studio")
 
                 $("input#chooseFile").attr("accept", ".vssettings");
 
@@ -86,5 +117,137 @@
 
         });
     });
+
+    //show/hide optional parameters(3.5) on selector change IDEFrom==Visual Studio
+    $(document).ready(function () {
+
+        $("select#IDEFrom").change(function () {
+
+            if ($("select#IDEFrom").find(":selected").text() === "Select IDE")
+
+                $("div#optionalParameters").hide();
+
+            else if ($("select#IDEFrom").find(":selected").text() === "Eclipse")
+
+                $("div#optionalParameters").hide();
+
+            else if ($("select#IDEFrom").find(":selected").text() === "Visual Studio")
+
+                $("div#optionalParameters").show();
+
+        });
+
+    });
+
+    //if the user is converting to the same IDE, show a warning
+    $(document).ready(function () {
+
+        $("select#IDEFrom").change(function () {
+
+            if ($("select#IDEFrom").find(":selected").text() === $("select#IDETo").find(":selected").text())
+
+                $("span.warning").text("You are converting to the same IDE");
+
+            else $("span.warning").text("");
+
+            if ($("span.error").text() === "Please select an IDE to convert from.") {
+                $("span.error").text("");
+            }
+
+        });
+
+        $("select#IDETo").change(function () {
+
+            if ($("select#IDETo").find(":selected").text() === $("select#IDEFrom").find(":selected").text())
+
+                $("span.warning").text("You are converting to the same IDE.");
+
+            else $("span.warning").text("");
+
+            if ($("span.error").text() === "Please select an IDE to convert to.") {
+                $("span.error").text("");
+            }
+
+        });
+
+    });
+
+    //if a user hasn't selected a file or it is the wrong file, show error and don't POST
+    $(document).ready(function () {
+
+        $("form").submit(function () {
+
+            //$("button#Download").prop("disabled", false);
+
+            var fileExtension = $("input#chooseFile").val().split(".").pop();
+
+            if (fileExtension === null || fileExtension === "") {
+
+                $("span.error").text("Please choose a theme to convert.")
+                return false;
+            }
+
+            if ($("select#IDEFrom").find(":selected").text() === "Eclipse" && !(fileExtension === "xml")) {
+
+                $("span.error").text("Please choose a .xml file.")
+                return false;
+            }
+
+            if ($("select#IDEFrom").find(":selected").text() === "Visual Studio" && !(fileExtension === "vssettings")) {
+
+                $("span.error").text("Please choose a .vssettings file.")
+                return false;
+            }
+
+            if ($("select#IDEFrom").find(":selected").text() === $("select#IDETo").find(":selected").text()) {
+
+                return false;
+            }
+
+            return true;
+
+
+        });
+    });
+
+    //if a user hasn't selected either IDEFrom or IDETo, show error and don't POST
+    $(document).ready(function () {
+
+        $("form").submit(function () {
+
+            if ($("select#IDETo").find(":selected").text() === "Select IDE" && $("select#IDEFrom").find(":selected").text() === "Select IDE") {
+                $("span.error").text("Please select an IDE to convert from.")
+                return false;
+            }
+
+            if ($("select#IDETo").find(":selected").text() === "Select IDE") {
+                $("span.error").text("Please select an IDE to convert to.")
+                return false;
+            }
+
+            if ($("select#IDEFrom").find(":selected").text() === "Select IDE") {
+                $("span.error").text("Please select an IDE to convert from.")
+                return false;
+            }
+
+            return true;
+
+        });
+    });
+
+    //reset 'choose file error' on choosing a new file
+    $(document).ready(function () {
+
+        $("input#chooseFile").on("click", function () {
+
+            if ($("span.error").text().includes("Please choose")) {
+
+                $("span.error").text("");
+            }
+
+        });
+    });
+
+
 
 </script>

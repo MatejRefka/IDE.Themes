@@ -1,12 +1,32 @@
-﻿/*Default Selectors*/
+﻿/*GLOBAL SELECTOR*/
 
-h2{
-    color:red;
+body {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-variant-numeric: lining-nums;
+    font-size: 1rem;
 }
 
+/*DEFAULT SELECTORS*/
+h2 {
+    color: red;
+}
 
+p, select, label, button {
+    color: green;
+}
 
-/*Classes*/
+hr {
+    border-top: 2px solid black;
+    margin-bottom: 2vh;
+    margin-top:0px;
+}
+
+a{
+
+}
+
+/*CLASSES*/
 
 .chart-container {
     position: relative;
@@ -15,9 +35,55 @@ h2{
     width: 80vw;
 }
 
-/*Sudo Selectors*/
+.raised {
+    display: inline-block;
+    vertical-align: 12%;
+}
 
-/*IDs*/
+.numbers {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
+.warning{
+    color:orange;
+}
+
+.error{
+    color:red;
+}
+
+/*layout*/
+.footer {
+    background: blue;
+}
+
+.navbar {
+    display: block;
+}
+.navitem {
+    overflow: hidden;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 10vh;
+    display: inline-block;
+}
+.lastnavitem {
+    overflow: hidden;
+    margin-left: 1vw;
+    margin-right: 2vw;
+    margin-top: 10vh;
+    display: inline-block;
+}
+
+/*SUDO SELECTORS*/
+
+/*IDS*/
+
+#artificialControl {
+    color: red;
+}
+
 
 
 

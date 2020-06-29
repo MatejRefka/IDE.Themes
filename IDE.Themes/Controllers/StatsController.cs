@@ -225,6 +225,21 @@ namespace IDE.Themes.Controllers {
             totalConversions = allModels.Count().ToString();
             ViewData["TotalConverstions"] = totalConversions;
 
+            string firstdd = currentFirstDate.ToString("dd");
+            ViewData["Firstdd"] = firstdd;
+            string firstMM = currentFirstDate.ToString("MM");
+            ViewData["FirstMM"] = firstMM;
+            //string firstyyyy = currentFirstDate.ToString("yyyy");
+            //ViewData["Firstyyyy"] = firstyyyy;
+            //string firstH = currentFirstDate.ToString("H");
+            //ViewData["FirstH"] = firstH;
+            //string firstmm = currentFirstDate.ToString("mm");
+            //ViewData["Firstmm"] = firstmm;
+            //string firsttt = currentFirstDate.ToString("tt");
+            //ViewData["Firsttt"] = firsttt;
+
+
+
             string firstDate = currentFirstDate.ToString("dd/MM/yyyy, H:mm tt");
             string lastDate = currentLastDate.ToString("dd/MM/yyyy, H:mm tt");
             ViewData["FirstDate"] = firstDate;

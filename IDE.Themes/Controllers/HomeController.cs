@@ -36,6 +36,7 @@ namespace IDE.Themes.Controllers {
         private List<HashSet<string>> colorRecords = new List<HashSet<string>>();
         private HashSet<string> recordSet = new HashSet<string>();
         private List<string> graphColors = new List<string> { "Red", "Pink", "Purple", "Blue", "Cyan", "Teal", "Green", "Yellow", "Orange", "Brown", "White", "Black" };
+        private static int extraCounter = 0; 
         #endregion Helper fields holding temp values or some state
 
         /*CONSTRUCTOR*/
@@ -61,6 +62,14 @@ namespace IDE.Themes.Controllers {
         [HttpGet]
         public IActionResult Index(HomeModel hModel) {
 
+            //control of the Download button disabled false/true (not the optimal solution but works) 
+            if (extraCounter == 0) {
+                ViewData["DownloadCounter"] = 0;
+            }
+            else {
+                extraCounter = 0;
+                ViewData["DownloadCounter"] = 1;
+            }
             
             return View(hModel);
         }
@@ -101,6 +110,9 @@ namespace IDE.Themes.Controllers {
             //Populate the dataModel with data from the Eclipse theme and update the DB
             await AddNewRecordAsync(homeModel.IdeFrom, file);
 
+            //controls the download button disabled/enabled
+            ViewData["DownloadCounter"] = 1;
+            extraCounter = 1;
 
             return RedirectToAction("Index", homeModel);
 
