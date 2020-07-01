@@ -21,50 +21,68 @@
 
     <div class="container-fluid">
 
-        <div class="row">
-            <div class="col-sm-3 navbar"></div>
+        <div class="mainc">
 
-            <div class="col-md-6 text-right">
-                <a class="navitem" asp-controller="Home" asp-action="Index">Home</a>
-                <a class="navitem" asp-controller="Installation" asp-action="Index">Installation</a>
-                <a class="navitem" asp-controller="Stats" asp-action="Index">Cool Stats</a>
-                <a class="lastnavitem" asp-controller="About" asp-action="Index">About</a>
-                <hr />
+            <div class="row header">
+                <div class="col-sm-3 navbar"></div>
+
+                <div class="col-lg-6 text-right navitems">
+                    <a class="navitem" asp-controller="Home" asp-action="Index">HOME</a><div class="vertical-line"></div><a class="navitem" asp-controller="Installation" asp-action="Index">INSTALLATION</a><div class="vertical-line"></div><a class="navitem" asp-controller="Stats" asp-action="Index">STATS</a><div class="vertical-line"></div><a class="lastnavitem" asp-controller="About" asp-action="Index">ABOUT</a>
+                    <hr class="navhr" />
+                </div>
+
+                <div class="col-sm-3"></div>
             </div>
 
-            <div class="col-sm-3"></div>
-        </div>
 
+            <div class="row content">
+                <div class="col-sm-3"></div>
 
-        <div class="row">
-            <div class="col-sm-3"></div>
+                <div class="col-md-6">
 
-            <div class="col-sm-6">
+                    @RenderBody()
 
-                @RenderBody()
+                </div>
 
+                <div class="col-sm-3"></div>
             </div>
 
-            <div class="col-sm-3"></div>
         </div>
-
 
         <div class="row footer">
-            <div class="col-sm-2"></div>
 
-            <div class="col-sm-8">
-                <p>Contact:</p><span>Social Media</span>
-                <p>matejrefka@googlemail.com</p><span>I like to ....</span>
-                <p>github.com/MatejRefka</p>
-                <p>Social media:</p>
-                <p>Blablablablabla</p>
+            <div class="col-md-6">
+                <p class="contact"><span>Contact: </span><br/>For any inquiries, simply drop me an<br /> email at matejrefka@googlemail.com :P</p>
+            </div>
+            <div class="col-md-6">
+                <p class="social"><span>Social media:</span><br /> I like keeping my social life <a href="https://en.wikipedia.org/wiki/Privacy_concerns_with_social_networking_services" target="_blank" rel="noopener noreferrer">private</a> :v</p>
             </div>
 
-            <div class="col-sm-2"></div>
         </div>
 
+        <div class="row cp">
+
+            <div class="col-md-12" cp>
+                <p class="copyright">Copyright © 2020 Matej Refka. All rights reserved.</p>
+            </div>
+
     </div>
+
+    <script>
+        var loc = window.location.pathname;
+
+        $(".navitems").find("a").each(function () {
+            $(this).toggleClass("active", $(this).attr("href") == loc);
+        });
+    </script>
+
+
+
+
+
+
+
+
 </body>
 
 </html>
-

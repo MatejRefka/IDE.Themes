@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Files\TempTheme\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>
