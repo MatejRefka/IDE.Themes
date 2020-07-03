@@ -1,243 +1,313 @@
 ﻿@model HomeModel
 
-<h2 class="pageTitle">The Converter.</h2>
+<h2 class="pageTitle">THE CONVERTER.</h2>
 
 <div class="convertForm">
     <form asp-controller="Home" asp-action="" method="post" enctype="multipart/form-data">
-        <div>
-            <p><label><span class="numbers">1</span>. Convert From</label></p>
-            <select id="IDEFrom" asp-for="IdeFrom">
-                <option selected disabled>Select IDE</option>
-                <option>Eclipse</option>
-                <option>Visual Studio</option>
-            </select>
+
+        <div class="box">
+
+            <div class="item-1">
+                <div class="defaultItem">
+                    <label><span class="numbers">1</span>. Convert from:</label><br />
+                    <select id="IDEFrom" asp-for="IdeFrom">
+                        <option selected disabled>Select IDE</option>
+                        <option>Eclipse</option>
+                        <option>Visual Studio</option>
+                    </select>
+                </div>
+                <br />
+                <div id="optionalParameters" class="defaultItem">
+                    <label><span class="numbers">1</span>.<span class="numbers">5</span>. Prioritize theme from:</label><br />
+                    <input type="radio" name="para" id="CCsharp" value="CCsharp" asp-for="CCsharp" />
+                    <label for="CCsharp">C/C#</label>
+                    <br />
+                    <input type="radio" name="para" id="Cpp" value="Cpp" asp-for="Cpp" />
+                    <label for="Cpp">C++</label>
+                    <br />
+                    <input type="radio" name="para" id="CssScss" value="CssScss" asp-for="CssScss" />
+                    <label for="CssScss">CSS/SCSS</label>
+                    <br />
+                    <input type="radio" name="para" id="Html" value="Html" asp-for="Html" />
+                    <label for="Html">html</label>
+                    <br />
+                    <input type="radio" name="para" id="Xml" value="Xml" asp-for="Xml" />
+                    <label for="Xml">xml</label>
+                    <br />
+                    <input type="radio" name="para" id="Xaml" value="Xaml" asp-for="Xaml" />
+                    <label for="Xaml">xaml</label>
+                    <br />
+                </div>
+            </div>
+
+            <div class="item-2">
+                <div class="defaultItem">
+                    <label><span class="numbers">2</span>. Choose your theme:</label><br />
+                    <input id="chooseFile" type="file" name="file" formenctype="multipart/form-data" accept="" style="display: none;" />
+                    <input class="chooseFileButton" type="button" value="Choose File" onclick="document.getElementById('chooseFile').click();" />
+                    <br/>
+                    <span id="fileName"></span>
+                </div>
+                <div class="defaultItem">
+                    <label><span class="numbers">3</span>. Convert to:</label><br />
+                    <select id="IDETo" asp-for="IdeTo">
+                        <option selected disabled>Select IDE</option>
+                        <option>Eclipse</option>
+                        <option>Visual Studio</option>
+                    </select>
+                    <p class="warning"></p>
+                </div>
+            </div>
+
+            <div class="item-3">
+                <div class="defaultItem">
+                    <label><span class="numbers">4</span>. Convert:</label><br />
+                    <button id="Convert" type="submit" formaction="/Home/Convert" usesubmitbehaviour="false" onclick="Download.disabled='true'">Convert </button>
+                    <p class="error"></p>
+                </div>
+                <div class="defaultItem">
+                    <label><span class="numbers">5</span>. Download:</label><br />
+                    <button id="Download" name="Download" onclick="location.href='@Url.Action("Download", "Home")'">Download </button>
+                </div>
+            </div>
         </div>
 
-        <div>
-            <p><label><span class="numbers">2</span>. Choose your theme</label></p>
-            <input id="chooseFile" type="file" name="file" formenctype="multipart/form-data" accept="" style="display: none;" />
-            <input type="button" value="Choose File" onclick="document.getElementById('chooseFile').click();" />
-        </div>
-
-        <div>
-            <p><label><span class="numbers">3</span>. Convert To</label></p>
-            <select id="IDETo" asp-for="IdeTo">
-                <option selected>Select IDE</option>
-                <option>Eclipse</option>
-                <option>Visual Studio</option>
-            </select>
-            <span class="warning"></span>
-        </div>
-
-        <div id="optionalParameters">
-            <p><label><span class="numbers">3</span>.<span class="numbers">5</span>. Prioritize theme from (optional)</label></p>
-            <input type="checkbox" name="CCsharp" id="CCsharp" asp-for="CCsharp" />
-            <label>C/C#</label>
-            <br />
-            <input type="checkbox" name="Cpp" id="Cpp" asp-for="Cpp" />
-            <label>C++</label>
-            <br />
-            <input type="checkbox" name="CssScss" id="CssScss" asp-for="CssScss" />
-            <label>CSS/SCSS</label>
-            <br />
-            <input type="checkbox" name="Html" id="Html" asp-for="Html" />
-            <label>html</label>
-            <br />
-            <input type="checkbox" name="Xml" id="Xml" asp-for="Xml" />
-            <label>xml</label>
-            <br />
-            <input type="checkbox" name="Xaml" id="Xaml" asp-for="Xaml" />
-            <label>xaml</label>
-        </div>
-
-        <div>
-            <p><label><span class="numbers">4</span>. Convert</label></p>
-            <button id="Convert" type="submit" formaction="/Home/Convert" usesubmitbehaviour="false" onclick="Download.disabled='true'">Convert </button>
-            <span class="error"></span>
-        </div>
     </form>
-    <div>
-        <p><label><span class="numbers">5</span>. Download</label></p>
-        <button id="Download" name="Download" onclick="location.href='@Url.Action("Download", "Home")'">Download </button>
-    </div>
-    <div>
-        <p id="artificialControl">PP</p>
-    </div>
-
 </div>
 
 <script>
 
+    //show the file name uploaded upon 'choose file' button event change.
+    let fileName = document.getElementById("chooseFile");
+    let fileNameField = document.getElementById("fileName");
 
-
-    //setup on page load
-    $(document).ready(function () {
-
-        $("div#optionalParameters").hide();
-
-
-
-        @if(ViewData["DownloadCounter"].ToString() == "1") {
-
-            <text>$("button#Download").prop("disabled", false);</text>
-
-
-        } 
-        @if(ViewData["DownloadCounter"].ToString() != "1") {
-
-            <text>$("button#Download").prop("disabled", true);</text>
-        }
-
-        //$("button#Download").prop("disabled", true);
-
-        $("p#artificialControl").text($("#chooseFile").val());
-
+    fileName.addEventListener("change", function () {
+        let uploadedFileName = event.target.files[0].name;
+        fileNameField.textContent = uploadedFileName;
     });
 
-    //choose a correct extension based on IDEFrom
-    $(document).ready(function () {
+        //setup on page load
+        $(document).ready(function () {
 
-        $("select#IDEFrom").change(function () {
+            $("div#optionalParameters").hide();
 
-            if ($("select#IDEFrom").find(":selected").text() === "Eclipse")
+            @if(ViewData["DownloadCounter"].ToString() == "1") {
 
-                $("input#chooseFile").attr("accept", ".xml");
+                <text>$("button#Download").prop("disabled", false);</text>
 
-            else if ($("select#IDEFrom").find(":selected").text() === "Visual Studio")
+                //it's a correct file and show a success message
+                <text>$("p.error").text("Successfully converted. =)");</text>
+                <text>$("p.error").css("color", "rgb(46,196,182)");</text>
+            }
+            @if (ViewData["DownloadCounter"].ToString() != "1") {
 
-                $("input#chooseFile").attr("accept", ".vssettings");
+                <text>$("button#Download").prop("disabled", true).addClass("disabled");</text>
+                <text>$("p.error").css("color", "rgb(231,29,54)");</text>
+            }
 
-            else $("input#chooseFile").attr("accept", "");
+            //$("button#Download").prop("disabled", true);
 
-        });
-    });
-
-    //show/hide optional parameters(3.5) on selector change IDEFrom==Visual Studio
-    $(document).ready(function () {
-
-        $("select#IDEFrom").change(function () {
-
-            if ($("select#IDEFrom").find(":selected").text() === "Select IDE")
-
-                $("div#optionalParameters").hide();
-
-            else if ($("select#IDEFrom").find(":selected").text() === "Eclipse")
-
-                $("div#optionalParameters").hide();
-
-            else if ($("select#IDEFrom").find(":selected").text() === "Visual Studio")
-
-                $("div#optionalParameters").show();
+            $("p#artificialControl").text($("#chooseFile").val());
 
         });
 
-    });
+        //choose a correct extension based on IDEFrom
+        $(document).ready(function () {
 
-    //if the user is converting to the same IDE, show a warning
-    $(document).ready(function () {
+            $("select#IDEFrom").change(function () {
 
-        $("select#IDEFrom").change(function () {
+                if ($("select#IDEFrom").find(":selected").text() === "Eclipse")
 
-            if ($("select#IDEFrom").find(":selected").text() === $("select#IDETo").find(":selected").text())
+                    $("input#chooseFile").attr("accept", ".xml");
 
-                $("span.warning").text("You are converting to the same IDE");
+                else if ($("select#IDEFrom").find(":selected").text() === "Visual Studio")
 
-            else $("span.warning").text("");
+                    $("input#chooseFile").attr("accept", ".vssettings");
 
-            if ($("span.error").text() === "Please select an IDE to convert from.") {
-                $("span.error").text("");
-            }
+                else $("input#chooseFile").attr("accept", "");
+
+            });
+        });
+
+        //show/hide optional parameters(3.5) on selector change IDEFrom==Visual Studio
+        $(document).ready(function () {
+
+            $("select#IDEFrom").change(function () {
+
+                if ($("select#IDEFrom").find(":selected").text() === "Select IDE")
+
+                    $("div#optionalParameters").hide();
+
+                else if ($("select#IDEFrom").find(":selected").text() === "Eclipse")
+
+                    $("div#optionalParameters").hide();
+
+                else if ($("select#IDEFrom").find(":selected").text() === "Visual Studio")
+
+                    $("div#optionalParameters").show();
+
+            });
 
         });
 
-        $("select#IDETo").change(function () {
+        //if the user is converting to the same IDE, show a warning
+        $(document).ready(function () {
 
-            if ($("select#IDETo").find(":selected").text() === $("select#IDEFrom").find(":selected").text())
+            $("select#IDEFrom").change(function () {
 
-                $("span.warning").text("You are converting to the same IDE.");
+                if ($("select#IDEFrom").find(":selected").text() === $("select#IDETo").find(":selected").text())
 
-            else $("span.warning").text("");
+                    $("p.warning").text("Conversion to the same IDE.");
 
-            if ($("span.error").text() === "Please select an IDE to convert to.") {
-                $("span.error").text("");
-            }
+                else $("p.warning").text("");
 
-        });
+                if ($("p.error").text() === "Select an IDE to convert from.") {
+                    $("p.error").text("");
+                }
 
-    });
+            });
 
-    //if a user hasn't selected a file or it is the wrong file, show error and don't POST
-    $(document).ready(function () {
+            $("select#IDETo").change(function () {
 
-        $("form").submit(function () {
+                if ($("select#IDETo").find(":selected").text() === $("select#IDEFrom").find(":selected").text())
 
-            //$("button#Download").prop("disabled", false);
+                    $("p.warning").text("Conversion to the same IDE.");
 
-            var fileExtension = $("input#chooseFile").val().split(".").pop();
+                else $("p.warning").text("");
 
-            if (fileExtension === null || fileExtension === "") {
+                if ($("p.error").text() === "Select an IDE to convert to.") {
+                    $("p.error").text("");
+                }
 
-                $("span.error").text("Please choose a theme to convert.")
-                return false;
-            }
-
-            if ($("select#IDEFrom").find(":selected").text() === "Eclipse" && !(fileExtension === "xml")) {
-
-                $("span.error").text("Please choose a .xml file.")
-                return false;
-            }
-
-            if ($("select#IDEFrom").find(":selected").text() === "Visual Studio" && !(fileExtension === "vssettings")) {
-
-                $("span.error").text("Please choose a .vssettings file.")
-                return false;
-            }
-
-            if ($("select#IDEFrom").find(":selected").text() === $("select#IDETo").find(":selected").text()) {
-
-                return false;
-            }
-
-            return true;
-
+            });
 
         });
-    });
 
-    //if a user hasn't selected either IDEFrom or IDETo, show error and don't POST
-    $(document).ready(function () {
 
-        $("form").submit(function () {
 
-            if ($("select#IDETo").find(":selected").text() === "Select IDE" && $("select#IDEFrom").find(":selected").text() === "Select IDE") {
-                $("span.error").text("Please select an IDE to convert from.")
-                return false;
-            }
+        //if a user hasn't selected a file or it is the wrong file, show error and don't POST
+        $(document).ready(function () {
 
-            if ($("select#IDETo").find(":selected").text() === "Select IDE") {
-                $("span.error").text("Please select an IDE to convert to.")
-                return false;
-            }
+            $("form").submit(function () {
 
-            if ($("select#IDEFrom").find(":selected").text() === "Select IDE") {
-                $("span.error").text("Please select an IDE to convert from.")
-                return false;
-            }
+                var fileExtension = $("input#chooseFile").val().split(".").pop();
 
-            return true;
+                if (fileExtension === null || fileExtension === "") {
 
+                    $("p.error").text("Choose a theme to convert.")
+                    return false;
+                }
+
+                if ($("select#IDEFrom").find(":selected").text() === "Eclipse" && !(fileExtension === "xml")) {
+
+                    $("p.error").text("Choose an .xml file.")
+                    return false;
+                }
+
+                if ($("select#IDEFrom").find(":selected").text() === "Visual Studio" && !(fileExtension === "vssettings")) {
+
+                    $("p.error").text("Choose a .vssettings file.")
+                    return false;
+                }
+
+                if ($("select#IDEFrom").find(":selected").text() === $("select#IDETo").find(":selected").text()) {
+
+                    return false;
+                }
+
+                return true;
+
+            });
         });
-    });
 
-    //reset 'choose file error' on choosing a new file
+
+        //extra control for the convert button. takes control after download.
+        $(document).ready(function () {
+
+            $("#Convert").on("click", function () {
+
+                $("p.error").show();
+                $("p.error").css("color", "rgb(231, 29, 54)");
+
+                var fileExtension = $("input#chooseFile").val().split(".").pop();
+
+                if (fileExtension === null || fileExtension === "") {
+
+                    $("p.error").text("Choose a theme to convert.")
+                    return false;
+                }
+
+                if ($("select#IDEFrom").find(":selected").text() === "Eclipse" && !(fileExtension === "xml")) {
+
+                    $("p.error").text("Choose an .xml file.")
+                    return false;
+                }
+
+                if ($("select#IDEFrom").find(":selected").text() === "Visual Studio" && !(fileExtension === "vssettings")) {
+
+                    $("p.error").text("Choose a .vssettings file.")
+                    return false;
+                }
+
+                if ($("select#IDEFrom").find(":selected").text() === $("select#IDETo").find(":selected").text()) {
+
+                    return false;
+                }
+
+                return true;
+
+            });
+        });
+
+
+        //if a user hasn't selected either IDEFrom or IDETo, show error and don't POST
+        $(document).ready(function () {
+
+            $("form").submit(function () {
+
+                if ($("select#IDETo").find(":selected").text() === "Select IDE" && $("select#IDEFrom").find(":selected").text() === "Select IDE") {
+                    $("p.error").text("Select an IDE to convert from.")
+                    return false;
+                }
+
+                if ($("select#IDETo").find(":selected").text() === "Select IDE") {
+                    $("p.error").text("Select an IDE to convert to.")
+                    return false;
+                }
+
+                if ($("select#IDEFrom").find(":selected").text() === "Select IDE") {
+                    $("p.error").text("Select an IDE to convert from.")
+                    return false;
+                }
+
+                return true;
+
+            });
+        });
+
+        //reset 'choose file error' on choosing a new file
+        $(document).ready(function () {
+
+            $("input#chooseFile").on("click", function () {
+
+                if ($("p.error").text().includes("Choose a")) {
+
+                    $("p.error").text("");
+                }
+
+            });
+        });
+
+    //reset 'successful' on choosing a new file
     $(document).ready(function () {
 
-        $("input#chooseFile").on("click", function () {
+        $("button#Download").on("click", function () {
 
-            if ($("span.error").text().includes("Please choose")) {
+            $("p.error").hide();
+            $("p.error").css("color", "E71D36");
 
-                $("span.error").text("");
-            }
+            $("button#Download").prop("disabled", true).addClass("disabled");
+            //location.reload();
 
         });
     });

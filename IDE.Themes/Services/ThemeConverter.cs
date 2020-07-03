@@ -243,7 +243,7 @@ namespace IDE.Themes.Services {
         }
         #endregion Convert Eclipse to VS, create and populate a .vssettings theme file
 
-        #region Convert VS to Eclipse, create and populate a .vssettings theme file
+        #region Convert VS to Eclipse, create and populate an .xml theme file
         public void ConvertVisualToEclipse(IFormFile file, ThemeDictionary dictionary, HomeModel model) {
 
             string vsFileText = FileToStringAsync(file).Result;
@@ -461,6 +461,10 @@ namespace IDE.Themes.Services {
 
             //write the new theme to TempTheme folder
             File.WriteAllLines(ThemeDir, convertedItems);
+
+            //remove empty lines
+            var lines = File.ReadAllLines(ThemeDir).Where(arg => !string.IsNullOrWhiteSpace(arg));
+            File.WriteAllLines(ThemeDir, lines);
 
         }
         #endregion Convert VS to Eclipse, create and populate a .vssettings theme file

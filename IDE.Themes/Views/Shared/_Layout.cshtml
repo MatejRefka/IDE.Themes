@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IDE Themes</title>
@@ -15,6 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link href="~/css/Style.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -26,7 +28,7 @@
             <div class="row header">
                 <div class="col-sm-3 navbar"></div>
 
-                <div class="col-lg-6 text-right navitems">
+                <div class="col-xl-6 text-right navitems">
                     <a class="navitem" asp-controller="Home" asp-action="Index">HOME</a><div class="vertical-line"></div><a class="navitem" asp-controller="Installation" asp-action="Index">INSTALLATION</a><div class="vertical-line"></div><a class="navitem" asp-controller="Stats" asp-action="Index">STATS</a><div class="vertical-line"></div><a class="lastnavitem" asp-controller="About" asp-action="Index">ABOUT</a>
                     <hr class="navhr" />
                 </div>
@@ -38,7 +40,7 @@
             <div class="row content">
                 <div class="col-sm-3"></div>
 
-                <div class="col-md-6">
+                <div class="col-xl-6">
 
                     @RenderBody()
 
@@ -52,7 +54,7 @@
         <div class="row footer">
 
             <div class="col-md-6">
-                <p class="contact"><span>Contact: </span><br/>For any inquiries, simply drop me an<br /> email at matejrefka@googlemail.com :P</p>
+                <p class="contact"><span>Contact: </span><br />For any inquiries, simply drop me an<br /> email at matejrefka@googlemail.com :P</p>
             </div>
             <div class="col-md-6">
                 <p class="social"><span>Social media:</span><br /> I like keeping my social life <a href="https://en.wikipedia.org/wiki/Privacy_concerns_with_social_networking_services" target="_blank" rel="noopener noreferrer">private</a> :v</p>
@@ -66,8 +68,8 @@
                 <p class="copyright">Copyright © 2020 Matej Refka. All rights reserved.</p>
             </div>
 
+        </div>
     </div>
-
     <script>
         var loc = window.location.pathname;
 
