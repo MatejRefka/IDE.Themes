@@ -1,28 +1,21 @@
-﻿@{ 
-
-}
-
-
-<h2 class="pageTitle">Cool Stats.</h2>
-
-<p>Descrioption sadd nasjhbd cv ablsbalbas lasbd oasjnc jnsxacjkasn jkncsdjkc ndsfn ksdnfkdjs nasn cbas jchxbjc xz</p>
+﻿
+<h2 class="statsTitle">SUPER COOL STATS.</h2>
 
 
 <!--Cool Stats-->
 <div id="statsSection">
 
-    <h2>Cool Stats here::</h2>
+    <div class="firstStats">
+        <p>First conversion: <span class="numbers">@ViewData["FirstDate"]</span></p>
+        <p>Latest conversion: <span class="numbers">@ViewData["LastDate"]</span></p>
+        <p>Total conversions: <span class="numbers">@ViewData["TotalConverstions"]</span></p>
+    </div>
 
-    <p>Descrioption sadd nasjhbd cv ablsbalbas lasbd oasjnc jnsxacjkasn jkncsdjkc ndsfn ksdnfkdjs nasn cbas jchxbjc xz</p>
+    <div class="graphHeader">
+        <p>Foreground color occurances for all converted themes.</p>
+    </div>
 
-    <p>First conversion: <span class="numbers">@ViewData["FirstDate"]</span></p>
-    <p>Latest conversion: <span class="numbers">@ViewData["LastDate"]</span></p>
-    <p>Total conversions: <span class="numbers">@ViewData["TotalConverstions"]</span></p>
-
-
-    <h3>The foreground color occurances for all converted themes.</h3>
-
-    <div class="chart-container">
+    <div class="chartContainerForeground">
         <canvas id="foregroundChart"></canvas>
     </div>
 
@@ -30,7 +23,7 @@
         Chart.defaults.global.animation.duration = 2500;
         Chart.defaults.global.defaultFontSize = 15;
         Chart.defaults.global.defaultFontFamily = "'Raleway', sans-serif";
-        Chart.defaults.global.defaultFontColor = "#666";
+        Chart.defaults.global.defaultFontColor = "#011627";
 
         var foregroundValues = [];
         foregroundValues[0] = '@(((int[])ViewData["ForegroundOccurences"])[0])';
@@ -110,22 +103,16 @@
                 legend: {
                     display: false,
                 },
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Occurrences'
-                        }
-                    }]
-                }
             }
         });
 
     </script>
 
-    <h3>The background color occurances for all converted themes.</h3>
+    <div class="graphHeader">
+        <p>Background color occurances for all converted themes.</p>
+    </div>
 
-    <div class="chart-container">
+    <div class="chartContainerBackground">
         <canvas id="backgroundChart"></canvas>
     </div>
 
@@ -208,15 +195,6 @@
                 legend: {
                     display: false,
                 },
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Occurrences',                            
-                        },
-                        
-                    }]
-                }
             },
                plugins: [{
                    beforeDraw: function (c) {
@@ -232,8 +210,9 @@
 
     </script>
 
-
-
+    <div class="chartBottomText">
+        <p>The 'HEX to string color mapping' is determined by this <a href="https://blog.xkcd.com/2010/05/03/color-survey-results/" target="_blank" rel="noopener noreferrer">super-duper cool survey</a> conducted by Randall, more specifically this <a href="https://xkcd.com/color/satfaces.txt" target="_blank" rel="noopener noreferrer">text file</a>.</p>
+    </div>
 
 
 

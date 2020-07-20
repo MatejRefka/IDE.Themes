@@ -13,11 +13,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace IDE.Themes {
+
     public class Startup {
 
         //stores configuration
         public IConfiguration Configuration { get; }
-
 
         //Configuration holds the basic settings: URLs, content root, application name, environment
         public Startup(IConfiguration configuration) {

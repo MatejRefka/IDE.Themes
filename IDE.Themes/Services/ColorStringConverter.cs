@@ -72,7 +72,19 @@ namespace IDE.Themes.Services {
             else
                 return Color.FromArgb(255, v, p, q);
         }
-        
+
+        //Convert epf RGB string to hex eg. 222,12,23 => #de0c17
+        public string EpfRGBToHex(string epfRGB) {
+
+            string[] rgb = epfRGB.Split(",");
+
+            Color rgbColor = Color.FromArgb(Int32.Parse(rgb[0]), Int32.Parse(rgb[1]), Int32.Parse(rgb[2]));
+            string hex = rgbColor.R.ToString("X2") + rgbColor.G.ToString("X2") + rgbColor.B.ToString("X2");
+            hex = "#" + hex;
+
+            return hex;
+        }
+
 
     }
 }

@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <colorTheme id="99999">
-    <searchResultIndication color="#44475a" />
-    <filteredSearchResultIndication color="#44475a" />
-    <occurrenceIndication color="#44475a" underline="true" />
-    <writeOccurrenceIndication color="#44475a" underline="true" />
-    <findScope color="#44475a" />
-    <deletionIndication color="#ffb86c" />
-    <sourceHoverBackground color="#8be9fd" />
-    <singleLineComment color="#6272a4" italic="false" />
-    <multiLineComment color="#6272a4" italic="false" />
-    <commentTaskTag color="#8be9fd" italic="false" underline="true" strikethrough="false" />
-    <javadoc color="#6272a4" italic="false" />
-    <javadocLink color="#8be9fd" italic="false" underline="true" strikethrough="false" />
-    <javadocTag color="#8be9fd" italic="false" />
-    <javadocKeyword color="#8be9fd" italic="false" />
-    <class color="#8be9fd" bold="false" underline="false" strikethrough="false" />
-    <interface color="#8be9fd" />
-    <method color="#50fa7b" />
-    <methodDeclaration color="#50fa7b" />
-    <bracket color="#f8f8f2" />
-    <number color="#ff79c6" />
-    <string color="#f1fa8c" />
-    <operator color="#8be9fd" />
-    <keyword color="#ff79c6" bold="false" />
-    <annotation color="#50fa7b" />
-    <staticMethod color="#50fa7b" />
-    <localVariable color="#f8f8f2" />
-    <localVariableDeclaration color="#ff79c6" />
-    <field color="#f8f8f2" />
-    <staticField color="#f8f8f2" />
-    <staticFinalField color="#bd93f9" />
-    <deprecatedMember color="#ffb86c" underline="false" strikethrough="true" />
-    <enum color="#bd93f9" />
-    <inheritedMethod color="#50fa7b" />
-    <abstractMethod color="#50fa7b" />
-    <parameterVariable color="#79ABFF" />
-    <typeArgument color="#8be9fd" />
-    <typeParameter color="#ffb86c" />
-    <constant color="#bd93f9" />
-    <background color="#282a36" />
-    <currentLine color="#44475a" />
-    <foreground color="#f8f8f2" />
-    <lineNumber color="#44475a" />
-    <selectionBackground color="#666B87" />
-    <selectionForeground color="#f8f8f2" />
+    <searchResultIndication color="#0E4583" />
+    <filteredSearchResultIndication color="#0E4583" />
+    <occurrenceIndication color="#0E4583" underline="true" />
+    <writeOccurrenceIndication color="#0E4583" underline="true" />
+    <findScope color="#773800" />
+    <deletionIndication color="#B8D7A3" />
+    <sourceHoverBackground color="#0E4583" />
+    <singleLineComment color="#57A64A" italic="false" />
+    <multiLineComment color="#57A64A" italic="false" />
+    <commentTaskTag color="#57A64A" italic="false" underline="true" strikethrough="false" />
+    <javadoc color="#608B4E" italic="false" />
+    <javadocLink color="#608B4E" italic="false" underline="true" strikethrough="false" />
+    <javadocTag color="#608B4E" italic="false" />
+    <javadocKeyword color="#608B4E" italic="false" />
+    <class color="#4EC9B0" bold="false" underline="false" strikethrough="false" />
+    <interface color="#B8D7A3" />
+    <method color="#CCCCCC" />
+    <methodDeclaration color="#CCCCCC" />
+    <bracket color="#CCCCCC" />
+    <number color="#B5CEA8" />
+    <string color="#D69D85" />
+    <operator color="#CCCCCC" />
+    <keyword color="#569CD6" bold="false" />
+    <annotation color="#57A64A" />
+    <staticMethod color="#CCCCCC" />
+    <localVariable color="#CCCCCC" />
+    <localVariableDeclaration color="#CCCCCC" />
+    <field color="#CCCCCC" />
+    <staticField color="#CCCCCC" />
+    <staticFinalField color="#CCCCCC" />
+    <deprecatedMember color="#B8D7A3" underline="false" strikethrough="true" />
+    <enum color="#B8D7A3" />
+    <inheritedMethod color="#CCCCCC" />
+    <abstractMethod color="#CCCCCC" />
+    <parameterVariable color="#CCCCCC" />
+    <typeArgument color="#B8D7A3" />
+    <typeParameter color="#B8D7A3" />
+    <constant color="#CCCCCC" />
+    <background color="#1E1E1E" />
+    <currentLine color="#1E1E1E" />
+    <foreground color="#DCDCDC" />
+    <lineNumber color="#2B91AF" />
+    <selectionBackground color="#3399FF" />
+    <selectionForeground color="#CCCCCC" />
 </colorTheme>

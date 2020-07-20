@@ -7,8 +7,6 @@ fileName.addEventListener("change", function () {
     fileNameField.textContent = uploadedFileName;
 });
 
-
-
 //choose a correct extension based on IDEFrom
 $(document).ready(function () {
 
@@ -81,8 +79,6 @@ $(document).ready(function () {
 
 });
 
-
-
 //if a user hasn't selected a file or it is the wrong file, show error and don't POST
 $(document).ready(function () {
 
@@ -96,9 +92,9 @@ $(document).ready(function () {
             return false;
         }
 
-        if ($("select#IDEFrom").find(":selected").text() === "Eclipse" && !(fileExtension === "xml")) {
+        if ($("select#IDEFrom").find(":selected").text() === "Eclipse" && !(fileExtension === "xml") && !(fileExtension === "epf")) {
 
-            $("p.error").text("Choose an .xml file.")
+            $("p.error").text("Choose .xml or .epf file.")
             return false;
         }
 
@@ -117,7 +113,6 @@ $(document).ready(function () {
 
     });
 });
-
 
 //extra control for the convert button. takes control after download.
 $(document).ready(function () {
@@ -135,9 +130,9 @@ $(document).ready(function () {
             return false;
         }
 
-        if ($("select#IDEFrom").find(":selected").text() === "Eclipse" && !(fileExtension === "xml")) {
+        if ($("select#IDEFrom").find(":selected").text() === "Eclipse" && !(fileExtension === "xml") && !(fileExtension === "epf")) {
 
-            $("p.error").text("Choose an .xml file.")
+            $("p.error").text("Choose .xml or .epf file.")
             return false;
         }
 
@@ -156,7 +151,6 @@ $(document).ready(function () {
 
     });
 });
-
 
 //if a user hasn't selected either IDEFrom or IDETo, show error and don't POST
 $(document).ready(function () {
@@ -209,3 +203,5 @@ $(document).ready(function () {
 
     });
 });
+
+

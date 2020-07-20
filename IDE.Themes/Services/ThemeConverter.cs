@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Policy;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -22,10 +23,16 @@ namespace IDE.Themes.Services {
 
         /*PRIVATE VARIABLES*/
 
+        #region Helper algorithm variables
+        string plainTextBgColor = "";
+        string currentLineColor = "";
+        #endregion Helper algorithm variables
+
         #region helper injection variables
 
         private readonly IWebHostEnvironment environment;
         private readonly ThemeDictionary dictionary;
+        private readonly ColorStringConverter colorConverter;
 
         #endregion helper injection variables
 
@@ -42,10 +49,11 @@ namespace IDE.Themes.Services {
         /*CONSTRUCTOR*/
 
         #region constructor
-        public ThemeConverter(IWebHostEnvironment environment, ThemeDictionary dictionary) {
+        public ThemeConverter(IWebHostEnvironment environment, ThemeDictionary dictionary, ColorStringConverter colorConverter) {
 
             this.environment = environment;
             this.dictionary = dictionary;
+            this.colorConverter = colorConverter;
         }
         #endregion constructor
 
@@ -56,7 +64,7 @@ namespace IDE.Themes.Services {
         public void CreateTempFile(IFormFile file) {
 
             //Eclipse to VS
-            if (Path.GetExtension(file.FileName) == ".xml") {
+            if (Path.GetExtension(file.FileName) == ".xml"|| Path.GetExtension(file.FileName) == ".epf") {
 
                 string templateDirVS = environment.ContentRootPath + @"\Files\templateTheme.vssettings";
 
@@ -110,23 +118,112 @@ namespace IDE.Themes.Services {
             string fileText;
 
             //read IFormFile to a string
-            using (var stream = file.OpenReadStream())
-            using (var reader = new StreamReader(stream)) {
+            using (var reader = new StreamReader(file.OpenReadStream())) {
 
                 return fileText = await reader.ReadToEndAsync();
             }
         }
         #endregion IFormFile to string conversion (async)
 
+        #region IFormFile to string list conversion (async)
+        public List<String> FileToStringList(IFormFile file) {
+
+            List<String> result = new List<String>();
+
+            using (var reader = new StreamReader(file.OpenReadStream())) {
+
+                while (reader.Peek() >= 0) {
+                    result.Add(reader.ReadLine());
+                }
+            }
+
+            return result;
+        }
+        #endregion IFormFile to string list conversion (async)
+
+        #region Extract theme items from .epf file into .xml
+
+        public string EpfToXml(IFormFile file, ThemeDictionary dictionary) {
+
+            //setup an artificial xml file (string to be returned)
+            string templateDirEclipse = environment.ContentRootPath + @"\Files\templateTheme.xml";
+            string xmlFile = File.ReadAllText(templateDirEclipse);
+            string[] xmlLines = File.ReadAllLines(templateDirEclipse);
+            IList<String> test = new List<string>();
+
+            List<String> epfLines = FileToStringList(file);
+
+            foreach(string line in epfLines) {
+
+                foreach(KeyValuePair<String,String> epfEntry in dictionary.EpfValues){
+
+                    if (line.Contains(epfEntry.Value)) {
+
+                        //grab the color
+                        int startRIndex = line.IndexOf("=")+1;
+                        string epfRGB = line.Substring(startRIndex);
+
+                        //convert the color to hex
+                        string hex = colorConverter.EpfRGBToHex(epfRGB);
+
+                        //add this color to an xml entry
+                        foreach(string xmlLine in xmlLines) {
+
+                            if (xmlLine.Contains(epfEntry.Key)) {
+
+                                int startI = xmlLine.IndexOf("color=\"") + 7;
+                                string color = hex;
+                                if (color != "") {
+                                    //adjust new color to Background or Foreground and replace it to the final file
+                                    string tempColor = xmlLine.Substring(startI, 7);
+                                    var newItem = xmlLine.Replace(tempColor, color);
+                                    xmlFile = xmlFile.Replace(xmlLine, newItem);
+                                    test.Add(xmlLine);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+
+            IList<String> testt = test;
+
+            return xmlFile;
+
+        }
+        #endregion Extract theme items from .epf file into .xml
 
         #region Convert Eclipse to VS, create and populate a .vssettings theme file
         public void ConvertEclipseToVisual(IFormFile file, ThemeDictionary dictionary) {
 
-            string eclipseFileText=FileToStringAsync(file).Result;
+            IList<String> newTheme = new List<String>() { };
+            int counter = 0;
+
+            string eclipseFileText = "";
+
+            if (file.FileName.Contains(".xml")) {
+
+                eclipseFileText = FileToStringAsync(file).Result;
+            }
+            else if (file.FileName.Contains(".epf")) {
+
+                eclipseFileText = EpfToXml(file, dictionary);
+            }
 
             //split the single string into <Item.../> strings, preserving the delimeters
             string[] eclipseItems = Regex.Split(eclipseFileText, @"(?=<)");
-            
+
+            //delete all the comments as they can interfere with the algorithm
+            List<String> items = eclipseItems.ToList<String>();
+            for (int i = 0; i < items.Count; i++) {
+                string item = items[i];
+                if (item.Contains("<!")) {
+                    items.RemoveAt(i);
+                }
+            }
+
+            eclipseItems = items.ToArray();
 
             //create xyz.vssettings file in ~\Files\TempTheme\xyz.vssettings
             CreateTempFile(file);
@@ -136,35 +233,23 @@ namespace IDE.Themes.Services {
 
             //split the single string into <Item.../> strings, preserving the delimeters
             string[] vsItems = Regex.Split(vsFileText, @"(?=<)");
+            newTheme = vsItems.ToList<String>();
 
             foreach (KeyValuePair<String, VsSettingsModel> entry in dictionary.Mapping) {
 
                 string currentKey = entry.Key;
 
-                //saving the color for these 2 keys
-                string plainTextForegroundColor = "";
-                string lineNumberForegroundColor = "";
-
-                //find the colors for the 2 keys
-                foreach(string row in eclipseItems) {
-                    if (row.Contains("foreground")) {
-                        int startIndex = row.IndexOf("color=\"") + 7;
-                        plainTextForegroundColor = row.Substring(startIndex, row.IndexOf("\"") - startIndex + 8);
-                        plainTextForegroundColor = ConvertColor(plainTextForegroundColor);
-                    }
-                    if (row.Contains("background")) {
-                        int startIndex = row.IndexOf("color=\"") + 7;
-                        lineNumberForegroundColor = row.Substring(startIndex, row.IndexOf("\"") - startIndex + 8);
-                        lineNumberForegroundColor = ConvertColor(lineNumberForegroundColor);
-                    }
-                }
+                //remove quotes from the key
+                currentKey = currentKey.Remove(0,1);
+                currentKey = currentKey.Remove(currentKey.Length-1,1);
 
                 //extract the color from an Eclipse key
                 foreach (string eclipseItem in eclipseItems) {
 
-                    string color;
+                    string color="";
 
                     if (eclipseItem.Contains(currentKey)) {
+                        counter++;
 
                         int startIndex = eclipseItem.IndexOf("color=\"") + 7;
                         color = eclipseItem.Substring(startIndex, eclipseItem.IndexOf("\"") - startIndex + 8);
@@ -177,6 +262,10 @@ namespace IDE.Themes.Services {
                         valuesToChange.AddRange(entry.Value.Html);
                         valuesToChange.AddRange(entry.Value.Xaml);
                         valuesToChange.AddRange(entry.Value.Xml);
+                        if (currentKey == "foreground") {
+                            valuesToChange.Add("\"Plain Text\"");
+                            valuesToChange.Add("\"Line Number\"");
+                        }
 
                         //remove empty values
                         valuesToChange = valuesToChange.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
@@ -188,45 +277,39 @@ namespace IDE.Themes.Services {
                                 foreach(string vsItem in vsItems) {
 
                                     if (vsItem.Contains(value) && value != "") {
+                                        
+                                        if(counter == 28) {
+                                            string s = "";
+                                        }
 
                                         string oldItem = vsItem;
                                         int startI;
 
                                         //outliers that change Background instead of Foreground
-                                        if (value == "\"CurrentLineActiveFormat\"" || value == "\"Selected Text\"" || value == "\"HTML Server-Side Script\"" || value == "\"Breakpoint (Enabled)\"" || value == "\"Current Statement\"" || value == "\"Plain Text\"" || value == "\"Line Number\"") {
+                                        if ((value == "\"CurrentLineActiveFormat\"" || value == "\"Selected Text\"" || value == "\"HTML Server-Side Script\"" || value == "\"Breakpoint (Enabled)\"" || value == "\"Current Statement\"" || value == "\"Plain Text\"" || value == "\"Line Number\"" || value == "\"MarkerFormatDefinition/HighlightedReference\"" || value == "\"MarkerFormatDefinition/HighlightedWrittenReference\"" || value == "\"MarkerFormatDefinition/HighlightParameterFormatDefinition\"" || value== "\"Line Numbers\"" || value == "\"MarkerFormatDefinition/FindHighlight\"")&& currentKey != "foreground") {
                                             startI = vsItem.IndexOf("Background=\"") + 12;
+                                            string tempColor = vsItem.Substring(startI, 10);
+                                            var newItem = vsItem.Replace(tempColor, color);
+                                            vsFileText = vsFileText.Replace(oldItem, newItem);
+                                            newTheme.Add(newItem);
 
-                                            //two instances where a single VS item changes foreground and background
-                                            if(value == "\"Plain Text\"") {
-                                                int startF = vsItem.IndexOf("Foreground=\"") + 12;
-                                                string tempCol = vsItem.Substring(startF, 10);
-                                                var newI = vsItem.Replace(tempCol, plainTextForegroundColor);
-                                                string tempC = vsItem.Substring(startI, 10);
-                                                var newIt = newI.Replace(tempC, color);
-                                                vsFileText = vsFileText.Replace(oldItem, newIt);
-                                                break;
+                                            //two outliers where Foreground AND Background colors need to be changed
+                                            if (value == "\"Plain Text\"") {
+                                                plainTextBgColor = color;
                                             }
-                                            if(value == "\"Line Number\"") {
-                                                int startF = vsItem.IndexOf("Foreground=\"") + 12;
-                                                string tempCol = vsItem.Substring(startF, 10);
-                                                var newI = vsItem.Replace(tempCol, color);
-                                                string tempC = vsItem.Substring(startI, 10);
-                                                var newIt = newI.Replace(tempC, lineNumberForegroundColor);
-                                                vsFileText = vsFileText.Replace(oldItem, newIt);
-                                                break;
+                                            if (value == "\"Line Number\"") {
+                                                currentLineColor = color;
                                             }
                                         }
 
                                         //else change the foreground
-                                        else {
+                                        if(!(value == "\"CurrentLineActiveFormat\"" || value == "\"Selected Text\"" || value == "\"HTML Server-Side Script\"" || value == "\"Breakpoint (Enabled)\"" || value == "\"Current Statement\"" ||  value == "\"MarkerFormatDefinition/HighlightedReference\"" || value == "\"MarkerFormatDefinition/HighlightedWrittenReference\"" || value == "\"MarkerFormatDefinition/HighlightParameterFormatDefinition\"" || value == "\"MarkerFormatDefinition/FindHighlight\"")) {
                                             startI = vsItem.IndexOf("Foreground=\"") + 12;
+                                            string tempColor = vsItem.Substring(startI, 10);
+                                            var newItem = vsItem.Replace(tempColor, color);
+                                            vsFileText = vsFileText.Replace(oldItem, newItem);
+                                            newTheme.Add(newItem);
                                         }
-
-                                        //adjust new color to Background or Foreground and replace it to the final file
-                                        string tempColor = vsItem.Substring(startI, 10);
-                                        var newItem = vsItem.Replace(tempColor, color);
-                                        vsFileText = vsFileText.Replace(oldItem, newItem);
-
                                     }
                                 }
                             }
@@ -234,8 +317,55 @@ namespace IDE.Themes.Services {
                     }
                 }
             }
+            
+            //upadate background for PlainText and CurrentLine
+            string[] vsItemsUpdated = Regex.Split(vsFileText, @"(?=<)");
+
+            foreach (string vsItem in vsItemsUpdated) {
+
+                if (vsItem.Contains("\"Plain Text\"")){
+                    int startI = vsItem.IndexOf("Background=\"") + 12;
+                    string tColor = vsItem.Substring(startI, 10);
+                    var newItem = vsItem.Replace(tColor, plainTextBgColor);
+                    vsFileText = vsFileText.Replace(vsItem, newItem);
+                }
+                if(vsItem.Contains("\"Line Number\"")) {
+                    int startI = vsItem.IndexOf("Background=\"") + 12;
+                    string tColor = vsItem.Substring(startI, 10);
+                    var newItem = vsItem.Replace(tColor, plainTextBgColor);
+                    startI = vsItem.IndexOf("Foreground=\"") + 12;
+                    string tempColor = vsItem.Substring(startI, 10);
+                    var newItem2 = newItem.Replace(tempColor, currentLineColor);
+                    vsFileText = vsFileText.Replace(vsItem, newItem2);
+                }
+            }
 
             string[] convertedItems = Regex.Split(vsFileText, @"(?=<)");
+
+            //grab all the VS values
+            List<String> allValues = new List<String>();
+            foreach(KeyValuePair<String,VsSettingsModel> entry in dictionary.Mapping){
+                allValues.AddRange(entry.Value.CCsharp);
+                allValues.AddRange(entry.Value.Cpp);
+                allValues.AddRange(entry.Value.CssScss);
+                allValues.AddRange(entry.Value.Html);
+                allValues.AddRange(entry.Value.Xaml);
+                allValues.AddRange(entry.Value.Xml);
+            }
+
+            //remove empty values
+            allValues = allValues.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+
+            //update convertedItems values with new values from newTheme list
+            foreach (string value in allValues) {
+                for (int i = 0; i < convertedItems.Length; i++) {
+                    foreach (string nItem in newTheme) {
+                        if (convertedItems[i].Contains(value) && nItem.Contains(value) && value!= "\"Plain Text\"" && value != "\"Line Number\"") {
+                            convertedItems[i] = nItem;
+                        }
+                    }
+                }
+            }
 
             //write the new theme to TempTheme folder
             File.WriteAllLines(ThemeDir, convertedItems);
@@ -388,9 +518,10 @@ namespace IDE.Themes.Services {
 
                 //if a default value was used then check for other values in the same list if they match an original key instead.
                 if (doubleCheckVal == true) {
-
+                    
                     string correctkey = dictionary.Mapping.FirstOrDefault(x => x.Value.CCsharp[0] == correctValue).Key;
                     foreach (string vsItem in vsItems) {
+
                         foreach(string value in dictionary.Mapping[correctkey].CCsharp) {
                             if (vsItem.Contains(value)) {
                                 correctValue = value;
@@ -414,7 +545,7 @@ namespace IDE.Themes.Services {
 
                         if (vsItem.Contains(valueToCompare)) {
 
-                            if (valueToCompare == "Plain Text" || valueToCompare == "Selected Text" || valueToCompare == "CurrentLineActiveFormat" || valueToCompare == "HTML Server-Side Script" || valueToCompare == "Breakpoint (Enabled)" || valueToCompare == "Current Statement") {
+                            if (valueToCompare == "Plain Text" || valueToCompare == "Selected Text" || valueToCompare == "CurrentLineActiveFormat" || valueToCompare == "HTML Server-Side Script" || valueToCompare == "Breakpoint (Enabled)" || valueToCompare == "Current Statement" || valueToCompare == "MarkerFormatDefinition/FindHighlight" || valueToCompare == "MarkerFormatDefinition/HighlightedReference" || valueToCompare == "MarkerFormatDefinition/HighlightedWrittenReference" || valueToCompare == "MarkerFormatDefinition/HighlightParameterFormatDefinition") {
 
                                 int startIndex = vsItem.IndexOf("Background=\"") + 12;
                                 color = vsItem.Substring(startIndex, 10);

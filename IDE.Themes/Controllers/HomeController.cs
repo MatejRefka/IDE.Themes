@@ -90,10 +90,9 @@ namespace IDE.Themes.Controllers {
                 return RedirectToAction("Index");
             }
 
-
             //if the file type is invalid, do nothing and just return the view
             //error prompt for the user is handled by JQuery in the view "text/xml" 
-            if (!(homeModel.IdeFrom == "Eclipse" && Path.GetExtension(file.FileName) == ".xml") && !(homeModel.IdeFrom == "Visual Studio" && Path.GetExtension(file.FileName) == ".vssettings")) {
+            if (!(homeModel.IdeFrom == "Eclipse" && (Path.GetExtension(file.FileName) == ".xml"|| Path.GetExtension(file.FileName) == ".epf")) && !(homeModel.IdeFrom == "Visual Studio" && Path.GetExtension(file.FileName) == ".vssettings")) {
 
                 return RedirectToAction("Index");
             }
