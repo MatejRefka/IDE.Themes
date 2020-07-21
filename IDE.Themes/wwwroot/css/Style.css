@@ -96,6 +96,9 @@ a {
     font-family: 'Lato', sans-serif;
     font-weight: 500;
 }
+.path {
+    color: #2EC4B6;
+}
 /*#endregion global*/
 
 /*#region layout*/
@@ -442,6 +445,33 @@ div.vertical-line {
     }
 }
 /*#endregion chart*/
+
+/*#region install*/
+.firstInstallHeader {
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: -15px;
+    margin-top: 3vh;
+}
+.installHeader {
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: -15px;
+    margin-top:2vh;
+}
+.installHeader p, .firstInstallHeader p{
+    font-size: 1.35em;
+}
+.installContent{
+    margin-left:5px;
+}
+.installBottomText {
+    margin-bottom: 10vh;
+}
+
+
+/*#endregion install*/
+
 
 /*PSEUDO SELECTORS*/
 a:hover {
