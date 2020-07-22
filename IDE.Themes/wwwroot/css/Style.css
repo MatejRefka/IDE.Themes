@@ -453,25 +453,121 @@ div.vertical-line {
     margin-bottom: -15px;
     margin-top: 3vh;
 }
-.installHeader {
+.installHeader{
     font-weight: 500;
     text-align: left;
     margin-bottom: -15px;
     margin-top:2vh;
 }
-.installHeader p, .firstInstallHeader p{
+.installHeader p, .firstInstallHeader p, .aboutHeader p{
     font-size: 1.35em;
 }
-.installContent{
+.installContent, .aboutContent{
     margin-left:5px;
 }
-.installBottomText {
+.installBottomText, .aboutBottomText{
     margin-bottom: 10vh;
 }
-
-
 /*#endregion install*/
 
+/*#region about*/
+.aboutContainer {
+    /*border: 1px solid red;*/
+    display: flex;
+    margin-top: 3vh;
+}
+.aboutParagraph{
+    
+}
+.aboutVideo{
+    width:100%;
+}
+p.firstParagraph{
+    padding-right:10px;
+    padding-top:20px;
+}
+p.videoLabel {
+    text-align: right;
+    padding-right: 10px;
+    color: #2EC4B6;
+    margin-top:50px;
+}
+span.arrowDown{
+    display:none;
+}
+.aboutHeader {
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: -5px;
+    margin-top: 3vh;
+}
+p.aboutAnswer, p.aboutBottomText{
+    margin-top:-10px;
+}
+@media ( max-width: 1677px) {
+    .aboutContainer{
+        display:block;
+    }
+    p.videoLabel{
+        text-align:left;
+        padding-right:0px;
+        margin-top:4px;
+    }
+    span.arrowRight{
+        display:none;
+    }
+    span.arrowDown{
+        display:inline-block;
+    }
+    p.firstParagraph {
+        padding-top: 0px;
+    }
+}
+@media (max-width: 1199px) {
+    .aboutContainer{
+        display:flex;
+    }
+    p.videoLabel {
+        text-align: right;
+        padding-right: 10px;
+        margin-top: 50px;
+    }
+    span.arrowRight {
+        display: inline-block;
+    }
+    span.arrowDown {
+        display: none;
+    }
+    p.firstParagraph {
+        padding-top: 20px;
+    }
+}
+@media ( max-width: 853px) {
+    .aboutContainer {
+        display: block;
+    }
+    p.videoLabel {
+        text-align: left;
+        padding-right: 0px;
+        margin-top: 4px;
+    }
+    span.arrowRight {
+        display: none;
+    }
+    span.arrowDown {
+        display: inline-block;
+    }
+    p.firstParagraph {
+        padding-top: 0px;
+    }
+}
+@media ( max-width: 620px) {
+    .iframeVideo {
+        width: 400px;
+        height: 225px;
+    }
+}
+/*#endregion about*/
 
 /*PSEUDO SELECTORS*/
 a:hover {
