@@ -245,7 +245,16 @@ namespace IDE.Themes.Controllers {
             //Add the theme colors from .xml theme
             if (themeFrom == "Eclipse") {
 
-                string fileTextString = await tConverter.FileToStringAsync(file);
+                string fileTextString;
+
+                if (file.FileName.Contains(".epf")) {
+
+                    fileTextString = tConverter.EpfToXml(file, dictionary);
+                }
+                else {
+
+                    fileTextString = await tConverter.FileToStringAsync(file);
+                }
 
                 //split the single string into <Item.../> strings, preserving the delimeters
                 eclipseItems = Regex.Split(fileTextString, @"(?=<)");

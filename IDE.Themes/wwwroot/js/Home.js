@@ -14,7 +14,7 @@ $(document).ready(function () {
 
         if ($("select#IDEFrom").find(":selected").text() === "Eclipse")
 
-            $("input#chooseFile").attr("accept", ".xml");
+            $("input#chooseFile").attr("accept", ".xml,.epf");
 
         else if ($("select#IDEFrom").find(":selected").text() === "Visual Studio")
 
