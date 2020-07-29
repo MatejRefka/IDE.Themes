@@ -30,10 +30,10 @@ namespace IDE.Themes {
 
 
            //create a table if it's not contructed yet
-           // using (var context = new ApplicationDbContext(Configuration)) {
+           using (var context = new ApplicationDbContext(Configuration)) {
 
-           //     context.Database.EnsureCreated();
-           //}
+                context.Database.EnsureCreated();
+           }
 
             services.AddControllersWithViews();
             services.AddSingleton<UserColorDataModel>();
