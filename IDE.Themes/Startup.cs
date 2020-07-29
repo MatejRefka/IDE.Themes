@@ -29,11 +29,11 @@ namespace IDE.Themes {
         public void ConfigureServices(IServiceCollection services) {
 
 
-            //create a table if it's not contructed yet
-            using (var context = new ApplicationDbContext(Configuration)) {
+           //create a table if it's not contructed yet
+           // using (var context = new ApplicationDbContext(Configuration)) {
 
-                context.Database.EnsureCreated();
-            }
+           //     context.Database.EnsureCreated();
+           //}
 
             services.AddControllersWithViews();
             services.AddSingleton<UserColorDataModel>();
