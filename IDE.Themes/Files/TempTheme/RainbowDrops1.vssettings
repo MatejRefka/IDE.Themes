@@ -88,19 +88,19 @@
             
 <Items>
               
-<Item Background="0x0000B807" BoldFont="No" Foreground="0x00000000" Name="MarkerFormatDefinition/FindHighlight" />
+<Item Background="0x009B781E" BoldFont="No" Foreground="0x00000000" Name="MarkerFormatDefinition/FindHighlight" />
               
-<Item Background="0x00CFFF00" BoldFont="No" Foreground="0x02000000" Name="MarkerFormatDefinition/HighlightedReference" />
+<Item Background="0x00444444" BoldFont="No" Foreground="0x02000000" Name="MarkerFormatDefinition/HighlightedReference" />
               
-<Item Background="0x00CFFF00" BoldFont="No" Foreground="0x00D3C0AD" Name="MarkerFormatDefinition/HighlightedWrittenReference" />
+<Item Background="0x00444444" BoldFont="No" Foreground="0x00D3C0AD" Name="MarkerFormatDefinition/HighlightedWrittenReference" />
               
-<Item Background="0x00CFFF00" BoldFont="No" Foreground="0x00D3C0AD" Name="MarkerFormatDefinition/HighlightParameterFormatDefinition" />
+<Item Background="0x00444444" BoldFont="No" Foreground="0x00D3C0AD" Name="MarkerFormatDefinition/HighlightParameterFormatDefinition" />
               
 <Item Background="0x02000000" BoldFont="No" Foreground="0x009B781E" Name="XML Doc Tag" />
               
 <Item Background="0x02000000" BoldFont="No" Foreground="0x007C8C9A" Name="XML Doc Comment" />
               
-<Item Background="0x00CFFF00" BoldFont="No" Foreground="0x02000000" Name="Selected Text" />
+<Item Background="0x005D513E" BoldFont="No" Foreground="0x02000000" Name="Selected Text" />
               
 <Item Background="0x00202020" BoldFont="No" Foreground="0x00626262" Name="Line Number" />
               
@@ -222,7 +222,7 @@
             
 <Items>
               
-<Item Background="0x00CFFF00" BoldFont="No" Foreground="0x02000000" Name="Selected Text" />
+<Item Background="0x005D513E" BoldFont="No" Foreground="0x02000000" Name="Selected Text" />
               
 <Item Background="0x00202020" BoldFont="No" Foreground="0x00F7E8D9" Name="Plain Text" />
             

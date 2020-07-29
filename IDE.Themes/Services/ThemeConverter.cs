@@ -66,10 +66,10 @@ namespace IDE.Themes.Services {
             //Eclipse to VS
             if (Path.GetExtension(file.FileName) == ".xml"|| Path.GetExtension(file.FileName) == ".epf") {
 
-                string templateDirVS = environment.ContentRootPath + @"\Files\templateTheme.vssettings";
+                string templateDirVS = environment.ContentRootPath + @"/Files/templateTheme.vssettings";
 
                 ThemeName = Path.GetFileNameWithoutExtension(file.FileName);
-                ThemeDir = environment.ContentRootPath + @"\Files\TempTheme\" + ThemeName + @".vssettings";
+                ThemeDir = environment.ContentRootPath + @"/Files/TempTheme/" + ThemeName + @".vssettings";
 
                 try {
                     File.Copy(templateDirVS, ThemeDir);
@@ -83,10 +83,10 @@ namespace IDE.Themes.Services {
             //VS to Eclipse
             else if (Path.GetExtension(file.FileName) == ".vssettings") {
 
-                string templateDirEclipse = environment.ContentRootPath + @"\Files\templateTheme.xml";
+                string templateDirEclipse = environment.ContentRootPath + @"/Files/templateTheme.xml";
 
                 ThemeName = Path.GetFileNameWithoutExtension(file.FileName);
-                ThemeDir = environment.ContentRootPath + @"\Files\TempTheme\" + ThemeName + @".xml";
+                ThemeDir = environment.ContentRootPath + @"/Files/TempTheme/" + ThemeName + @".xml";
 
                 try {
                     File.Copy(templateDirEclipse, ThemeDir);
@@ -102,7 +102,7 @@ namespace IDE.Themes.Services {
         #region Delete the contructed theme (after download)
         public void DeleteThemes() {
 
-            string rootPath = environment.ContentRootPath + @"\Files\TempTheme\";
+            string rootPath = environment.ContentRootPath + @"/Files/TempTheme/";
             DirectoryInfo directory = new DirectoryInfo(rootPath);
 
             foreach (FileInfo file in directory.GetFiles()) {
@@ -146,7 +146,7 @@ namespace IDE.Themes.Services {
         public string EpfToXml(IFormFile file, ThemeDictionary dictionary) {
 
             //setup an artificial xml file (string to be returned)
-            string templateDirEclipse = environment.ContentRootPath + @"\Files\templateTheme.xml";
+            string templateDirEclipse = environment.ContentRootPath + @"/Files/templateTheme.xml";
             string xmlFile = File.ReadAllText(templateDirEclipse);
             string[] xmlLines = File.ReadAllLines(templateDirEclipse);
             IList<String> test = new List<string>();

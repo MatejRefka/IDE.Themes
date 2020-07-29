@@ -264,7 +264,7 @@ namespace IDE.Themes.Controllers {
 
                 //get the converted Eclipse theme
                 string themeName = Path.GetFileNameWithoutExtension(file.FileName);
-                string themeDir = environment.ContentRootPath + @"\Files\TempTheme\" + themeName + @".xml";
+                string themeDir = environment.ContentRootPath + @"/Files/TempTheme/" + themeName + @".xml";
                 string fileTextString = System.IO.File.ReadAllText(themeDir);
 
                 //split the single string into <Item.../> strings, preserving the delimeters
