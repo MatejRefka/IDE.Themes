@@ -51,6 +51,9 @@ namespace IDE.Themes {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
+            app.UseDeveloperExceptionPage();
+
+            /*
             //if crash in development, show the HTML page with crash dump
             if (environment.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
@@ -63,6 +66,7 @@ namespace IDE.Themes {
                 //Adds HSTS header. The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            */
 
             //redirects HTTP to HTTPS
             app.UseHttpsRedirection();
