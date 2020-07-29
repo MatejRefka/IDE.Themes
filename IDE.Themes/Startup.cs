@@ -28,6 +28,13 @@ namespace IDE.Themes {
         //Injects controllers with views scheme to the server
         public void ConfigureServices(IServiceCollection services) {
 
+
+            //create a table if it's not contructed yet
+            using (var context = new ApplicationDbContext(Configuration)) {
+
+                context.Database.EnsureCreated();
+            }
+
             services.AddControllersWithViews();
             services.AddSingleton<UserColorDataModel>();
             services.AddSingleton<ThemeConverter>();
