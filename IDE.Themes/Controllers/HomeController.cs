@@ -157,7 +157,7 @@ namespace IDE.Themes.Controllers {
         #region Given RGB values, determine what color it is
         public string IdentifyRGB(int r, int g, int b) {
 
-            string filePath = environment.ContentRootPath + "\\Files\\satfaces.txt";
+            string filePath = environment.ContentRootPath + "/Files/satfaces.txt";
 
             IEnumerable<string> lines = System.IO.File.ReadLines(filePath);
 
