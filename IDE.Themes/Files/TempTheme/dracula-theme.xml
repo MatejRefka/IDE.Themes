@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colorTheme id="99999">
+<searchResultIndication color="#8be9fd" />
+<filteredSearchResultIndication color="#8be9fd" />
+<occurrenceIndication color="#8be9fd" underline="true" />
+<writeOccurrenceIndication color="#8be9fd" underline="true" />
+<findScope color="#44475a" />
+<deletionIndication color="#ffb86c" />
+<sourceHoverBackground color="#8be9fd" />
+<singleLineComment color="#6272a4" italic="false" />
+<multiLineComment color="#6272a4" italic="false" />
+<commentTaskTag color="#6272a4" italic="false" underline="true" strikethrough="false" />
+<javadoc color="#8be9fd" italic="false" />
+<javadocLink color="#8be9fd" italic="false" underline="true" strikethrough="false" />
+<javadocTag color="#8be9fd" italic="false" />
+<javadocKeyword color="#8be9fd" italic="false" />
+<class color="#8be9fd" bold="false" underline="false" strikethrough="false" />
+<interface color="#FFFF00" />
+<method color="#f8f8f2" />
+<methodDeclaration color="#f8f8f2" />
+<bracket color="#f8f8f2" />
+<number color="#ffffff" />
+<string color="#f1fa8c" />
+<operator color="#f8f8f2" />
+<keyword color="#ff79c6" bold="false" />
+<annotation color="#6272a4" />
+<staticMethod color="#f8f8f2" />
+<localVariable color="#f8f8f2" />
+<localVariableDeclaration color="#f8f8f2" />
+<field color="#f8f8f2" />
+<staticField color="#f8f8f2" />
+<staticFinalField color="#f8f8f2" />
+<deprecatedMember color="#ffb86c" underline="false" strikethrough="true" />
+<enum color="#bd93f9" />
+<inheritedMethod color="#f8f8f2" />
+<abstractMethod color="#f8f8f2" />
+<parameterVariable color="#f8f8f2" />
+<typeArgument color="#FFFF00" />
+<typeParameter color="#ffb86c" />
+<constant color="#f8f8f2" />
+<background color="#282a36" />
+<currentLine color="#282a36" />
+<foreground color="#f8f8f2" />
+<lineNumber color="#44475a" />
+<selectionBackground color="#666B87" />
+<selectionForeground color="#f8f8f2" />
+</colorTheme>
