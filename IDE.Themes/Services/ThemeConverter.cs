@@ -382,10 +382,6 @@ namespace IDE.Themes.Services {
             //split the single string into <Item.../> strings, preserving the delimeters
             string[] vsItems = Regex.Split(vsFileText, @"(?=<)");
 
-            ViewData["a"] = vsItems[0];
-
-
-
             //create xyz.xml file in ~\Files\TempTheme\xyz.xml
             CreateTempFile(file);
 
