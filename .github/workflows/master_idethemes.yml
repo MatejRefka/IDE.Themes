@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'idethemes'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE75C1C8C8A94ACE918692461D4724E4 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DF083980D59144268F5BC91F37B0D745 }}
           package: .
