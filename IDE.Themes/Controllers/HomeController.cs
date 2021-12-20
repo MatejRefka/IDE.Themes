@@ -81,7 +81,7 @@ namespace IDE.Themes.Controllers {
         public async Task<IActionResult> Convert(HomeModel homeModel, IFormFile file) {
 
             //delete any previously converted themes in TempTheme
-            tConverter.DeleteThemes();
+            //tConverter.DeleteThemes();
 
             //if a field is invalid, do nothing and just return the view
             //error prompt for the user is handled by JQuery in the view
