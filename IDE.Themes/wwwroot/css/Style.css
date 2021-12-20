@@ -5,20 +5,20 @@ body {
     font-weight: 500;
     font-variant-numeric: lining-nums;
     font-size: 1rem;
-    color: red;
+    color: #011627;
     background: #011627;
     border-top-width: 0.8vw;
     border-bottom-width: 0vw;
     border-left-width: 0.4vw;
     border-right-width: 0.4vw;
-    border-color: greenyellow;
+    border-color: #011627;
     border-style: solid;
 }
 button, input.chooseFileButton{
     border-color: #011627;
     border-radius: 7px;
     background-color: #FDFFFC;
-    color: green;
+    color: #011627;
     font-weight: 500;
     width: 120px;
     padding-top: 5px;
