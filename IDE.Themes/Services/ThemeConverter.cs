@@ -100,6 +100,7 @@ namespace IDE.Themes.Services {
         }
         #endregion Copy a template theme, serving as a new template file
 
+        
         #region Delete the contructed theme (after download)
         public void DeleteThemes() {
 
@@ -112,6 +113,7 @@ namespace IDE.Themes.Services {
             }
         }
         #endregion Delete the contructed theme (after download)
+        
 
         #region IFormFile to string conversion (async)
         public async Task<String> FileToStringAsync(IFormFile file) {

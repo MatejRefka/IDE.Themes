@@ -1,0 +1,257 @@
+
+<UserSettings>
+  
+<ApplicationIdentity version="15.0" />
+  
+<ToolsOptions>
+    
+<ToolsOptionsCategory RegisteredName="Environment" name="Environment" />
+  
+</ToolsOptions>
+  
+<Category RegisteredName="Environment_Group" name="Environment_Group">
+    
+<Category Category="{1EDA5DD4-927A-43a7-810E-7FD247D0DA1D}" Package="{DA9FB551-C724-11d0-AE1F-00A0C90FFFC3}" PackageName="Visual Studio Environment Package" RegisteredName="Environment_FontsAndColors" name="Environment_FontsAndColors">
+      
+<PropertyValue name="Version">2
+</PropertyValue>
+      
+<FontsAndColors Version="2.0">
+        
+<Categories>
+          
+<Category CharSet="1" FontIsDefault="No" FontName="Segoe UI" FontSize="9" GUID="{B36B0228-DBAD-4DB0-B9C7-2AD3E572010F}">
+            
+<Items>
+            
+</Items>
+          
+</Category>
+          
+<Category FontIsDefault="Yes" GUID="{E0187991-B458-4F7E-8CA9-42C9A573B56C}">
+            
+<Items>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XML Attribute Quotes" /> 
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XML Attribute Value" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00A24681" Name="XML CData Section" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00ACB0D9" Name="XML Attribute" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0028F89C" Name="XML Name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00A24681" Name="XML Comment" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XML Delimiter" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00887447" Name="XML Text" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XAML Markup Extension Parameter Value" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XAML Markup Extension Parameter Name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00ACB0D9" Name="XAML Markup Extension Class" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XAML Attribute Quotes" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XAML Attribute Value" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00A24681" Name="XAML CData Section" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00ACB0D9" Name="XAML Attribute" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0028F89C" Name="XAML Name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00A24681" Name="XAML Comment" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XAML Delimiter" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="XAML Text" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00887447" Name="Number" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00887447" Name="String" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="Identifier" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00A24681" Name="Comment" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x001E69EC" Name="Keyword" />
+              
+</Items>
+          
+</Category>
+          
+<Category FontIsDefault="Yes" GUID="{75A05685-00A8-4DED-BAE5-E7A50BFA929A}">
+            
+<Items>
+              
+<Item Background="0x00191919" BoldFont="No" Foreground="0x00000000" Name="MarkerFormatDefinition/FindHighlight" />
+              
+<Item Background="0x00616161" BoldFont="No" Foreground="0x02000000" Name="MarkerFormatDefinition/HighlightedReference" />
+              
+<Item Background="0x00616161" BoldFont="No" Foreground="0x00D3C0AD" Name="MarkerFormatDefinition/HighlightedWrittenReference" />
+              
+<Item Background="0x00616161" BoldFont="No" Foreground="0x00D3C0AD" Name="MarkerFormatDefinition/HighlightParameterFormatDefinition" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="XML Doc Tag" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="XML Doc Comment" />
+              
+<Item Background="0x003B4C41" BoldFont="No" Foreground="0x02000000" Name="Selected Text" />
+              
+<Item Background="0x00191919" BoldFont="No" Foreground="0x00666666" Name="Line Number" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00887447" Name="Number" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00887447" Name="String" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x02CCCCCC" Name="Operator" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x001E69EC" Name="Preprocessor Keyword" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x001E69EC" Name="Keyword" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="Identifier" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00A24681" Name="Comment" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="HTML Tag Delimiter" />
+              
+<Item Background="0x001E69EC" BoldFont="No" Foreground="0x02000000" Name="HTML Server-Side Script" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="HTML Operator" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="HTML Entity" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x001E69EC" Name="HTML Element Name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00A24681" Name="HTML Comment" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="HTML Attribute Value" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00ACB0D9" Name="HTML Attribute Name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - text" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - processing instruction" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - entity reference" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - delimiter" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - comment" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - cdata section" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - attribute value" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - attribute quotes" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00800080" Name="xml doc comment - attribute name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00ADB1CD" Name="type parameter name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0028F89C" Name="struct name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0028F89C" Name="module name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0025F087" Name="interface name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00008040" Name="enum name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="delegate name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0028F89C" Name="class name" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00887447" Name="string - verbatim" />
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x001E69EC" Name="CppMacroSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00008040" Name="CppEnumSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00927A35" Name="CppGlobalVariableSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00927A35" Name="CppLocalVariableSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00008040" Name="CppParameterSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00ACB0D9" Name="CppTypeSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0038C4F1" Name="CppFunctionSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0038C4F1" Name="CppMemberFunctionSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x008F7A35" Name="CppMemberFieldSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="CppStaticMemberFunctionSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="CppStaticMemberFieldSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x001E69EC" Name="CppNamespaceSemanticTokenFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00D7BA7D" Name="ScssMixinReferenceFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x0028F89C" Name="ScssMixinDeclarationFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00ACB0D9" Name="ScssVariableReferenceFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="ScssVariableDeclarationClassificationFormat"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00887447" Name="CSS String Value"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00FFFFFF" Name="CSS Property Value"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00ACB0D9" Name="CSS Property Name"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x001E69EC" Name="CSS Selector"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00D69C56" Name="CSS Keyword"/>
+              
+<Item Background="0x02000000" BoldFont="No" Foreground="0x00A24681" Name="CSS Comment"/>
+            
+</Items>
+          
+</Category>
+          
+<Category FontIsDefault="Yes" GUID="{58E96763-1D3B-4E05-B6BA-FF7115FD0B7B}">
+            
+<Items>
+              
+<Item Background="0x003B4C41" BoldFont="No" Foreground="0x02000000" Name="Selected Text" />
+              
+<Item Background="0x00191919" BoldFont="No" Foreground="0x00FFFFFF" Name="Plain Text" />
+            
+</Items>
+          
+</Category>
+          
+<Category FontIsDefault="Yes" GUID="{FF349800-EA43-46C1-8C98-878E78F46501}">
+            
+<Items>
+            
+</Items>
+          
+</Category>
+          
+<Category FontIsDefault="Yes" GUID="{FA937F7B-C0D2-46B8-9F10-A7A92642B384}">
+            
+<Items>
+            
+</Items>
+          
+</Category>
+        
+</Categories>
+      
+</FontsAndColors>
+    
+</Category>
+  
+</Category>
+  
+</UserSettings>
